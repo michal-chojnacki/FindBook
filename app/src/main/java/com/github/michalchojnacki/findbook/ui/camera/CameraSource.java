@@ -331,6 +331,7 @@ public class CameraSource {
      *
      * @throws IOException if the camera's preview texture or display could not be initialized
      */
+    @SuppressWarnings({"MissingPermission"})
     @RequiresPermission(Manifest.permission.CAMERA)
     public CameraSource start() throws IOException {
         synchronized (cameraLock) {
