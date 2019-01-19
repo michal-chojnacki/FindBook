@@ -28,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -68,7 +67,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     // Helper objects for detecting taps and pinches.
     private ScaleGestureDetector scaleGestureDetector;
-    private GestureDetector gestureDetector;
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -133,9 +131,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent e) {
         boolean b = scaleGestureDetector.onTouchEvent(e);
 
-        boolean c = gestureDetector.onTouchEvent(e);
-
-        return b || c || super.onTouchEvent(e);
+        return b || super.onTouchEvent(e);
     }
 
     /**
