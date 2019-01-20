@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha01'
     implementation 'com.google.android.gms:play-services-vision:15.0.0'
-    implementation ('com.squareup.retrofit2:converter-simplexml:2.0.0-beta3'){
+    implementation ('com.squareup.retrofit2:converter-simplexml:2.3.0'){
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'

@@ -14,7 +14,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
-import retrofit2.SimpleXmlConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 private val appModule = module {
     single {
