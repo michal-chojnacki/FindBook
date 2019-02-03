@@ -15,9 +15,9 @@ class MainViewModel(
     private val parentJob = Job()
     private val scope = CoroutineScope(parentJob + coroutineDispatcher)
 
-    fun searchForBook() {
+    fun searchForBook(query: String) {
         scope.launch {
-            val result = searchForBooksWithQuery("test")
+            val result = searchForBooksWithQuery(query)
             result.toString()
         }
     }

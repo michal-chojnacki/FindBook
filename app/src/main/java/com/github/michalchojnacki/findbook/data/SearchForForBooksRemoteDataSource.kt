@@ -6,11 +6,14 @@ import com.github.michalchojnacki.findbook.domain.model.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import java.io.IOException
 
-class SearchForForBooksRemoteDataSource(private val service: SearchForBooksService,
-                                        private val booksMapper: BooksMapper,
-                                        private val coroutineDispatcher: CoroutineDispatcher) : SearchForBooksDataSource {
+class SearchForForBooksRemoteDataSource(
+    private val service: SearchForBooksService,
+    private val booksMapper: BooksMapper,
+    private val coroutineDispatcher: CoroutineDispatcher
+) : SearchForBooksDataSource {
     override suspend fun searchForBooksWithQuery(query: String): Result<List<Book>> =
-        safeApiCall(coroutineDispatcher,
+        safeApiCall(
+            coroutineDispatcher,
             call = { requestSearchForBooksWithQuery(query) },
             errorMessage = "Error searching for books with $query!"
         )
