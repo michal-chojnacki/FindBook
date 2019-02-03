@@ -8,14 +8,41 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-    <TextView
-            android:id="@+id/message"
+    <Button
+            android:id="@+id/mainSearchWithOcrBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MainFragment"
+            android:text="@string/main_search_with_camera"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/mainSearchWithTextEt"
+            app:layout_constraintVertical_bias="1.0"/>
+
+    <Button
+            android:id="@+id/mainSearchWithTextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+            android:id="@+id/mainSearchWithTextEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/main_type_title"
+            android:ems="20"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/mainSearchWithTextBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
