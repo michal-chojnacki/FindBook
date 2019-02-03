@@ -44,7 +44,6 @@ private val repositoryModule = module {
     single { get<Retrofit>().create(SearchForBooksService::class.java) }
 }
 
-
 private val searchForBooksModule = module {
     single { BooksMapper() }
     single<SearchForBooksDataSource> {

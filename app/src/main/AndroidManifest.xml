@@ -22,8 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.camera.OcrCaptureActivity">
-
-        </activity>
+        <activity android:name=".ui.camera.OcrCaptureActivity"/>
     </application>
 </manifest>

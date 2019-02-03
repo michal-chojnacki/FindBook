@@ -11,7 +11,6 @@ class MainViewModel(
     private val searchForBooksWithQuery: SearchForBooksWithQueryUseCase,
     coroutineDispatcher: CoroutineDispatcher
 ) : ViewModel() {
-
     private val parentJob = Job()
     private val scope = CoroutineScope(parentJob + coroutineDispatcher)
 

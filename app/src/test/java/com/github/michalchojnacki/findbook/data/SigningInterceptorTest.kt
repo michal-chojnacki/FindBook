@@ -14,7 +14,6 @@ private const val FAKE_API_URL = "http://www.fakeapi.com"
 private const val FAKE_API_KEY = "fake_api_key"
 
 class SigningInterceptorTest {
-
     private val signingInterceptor = SigningInterceptor(FAKE_API_KEY)
     private val requestSlot = slot<Request>()
     private val mockInterceptorChain = mockk<Interceptor.Chain>()
