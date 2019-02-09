@@ -1,28 +1,28 @@
 package com.github.michalchojnacki.findbook.ui.main
 
-import androidx.lifecycle.ViewModel
-import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import android.widget.EditText
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
+import com.github.michalchojnacki.findbook.ui.common.Event
 
-class MainViewModel(
-    private val searchForBooksWithQuery: SearchForBooksWithQueryUseCase,
-    coroutineDispatcher: CoroutineDispatcher
-) : ViewModel() {
-    private val parentJob = Job()
-    private val scope = CoroutineScope(parentJob + coroutineDispatcher)
+class MainViewModel : BaseViewModel() {
+    private val _uiResultLiveData = MutableLiveData<Event<UiResult>>()
+    val uiResultLiveData: LiveData<Event<UiResult>>
+        get() = _uiResultLiveData
 
-    fun searchForBook(query: String) {
-        scope.launch {
-            val result = searchForBooksWithQuery(query)
-            result.toString()
+    fun onShowBookClick(queryEditText: EditText) {
+        queryEditText.text.toString().takeIf { it.isNotBlank() }?.let {
+            _uiResultLiveData.postValue(Event(UiResult.ShowBookList(it)))
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        parentJob.cancel()
+    fun onSearchForOcrClick() {
+        _uiResultLiveData.postValue(Event(UiResult.ShowOcrScanner))
+    }
+
+    sealed class UiResult {
+        object ShowOcrScanner : UiResult()
+        data class ShowBookList(val query: String) : UiResult()
     }
 }

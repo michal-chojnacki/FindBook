@@ -6,6 +6,7 @@ import com.github.michalchojnacki.findbook.data.SearchForForBooksRemoteDataSourc
 import com.github.michalchojnacki.findbook.data.SigningInterceptor
 import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
 import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
+import com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel
 import com.github.michalchojnacki.findbook.ui.main.MainViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +55,14 @@ private val searchForBooksModule = module {
         )
     }
     single { SearchForBooksWithQueryUseCase(get(), get<CoroutinesDispatcherProvider>().computation) }
-    viewModel { MainViewModel(get(), get<CoroutinesDispatcherProvider>().main) }
 }
 
-val appModules = listOf(appModule, repositoryModule, searchForBooksModule)
+private val bookListModule = module {
+    viewModel { (query: String) -> BookListViewModel(query, get(), get<CoroutinesDispatcherProvider>().main) }
+}
+
+private val mainViewModule = module {
+    viewModel { MainViewModel() }
+}
+
+val appModules = listOf(appModule, bookListModule, mainViewModule, repositoryModule, searchForBooksModule)
