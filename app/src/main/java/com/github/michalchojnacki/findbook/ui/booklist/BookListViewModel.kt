@@ -1,6 +1,5 @@
 package com.github.michalchojnacki.findbook.ui.booklist
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
 import com.github.michalchojnacki.findbook.domain.model.Book
@@ -16,27 +15,17 @@ class BookListViewModel(
     coroutineDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
     private val scope = CoroutineScope(parentJob + coroutineDispatcher)
-    private val _uiState = MutableLiveData<UiState>()
-    val uiState: LiveData<UiState>
-        get() = _uiState
+    val uiState = MutableLiveData<UiState>().apply { value = UiState() }
 
     init {
         scope.launch {
+            uiState.value = uiState.value!!.copy(progressBarVisible = true)
             val result = searchForBooksWithQuery(query)
             if (result is Result.Success) {
-                sendUiState(books = result.data)
+                uiState.value = uiState.value!!.copy(books = result.data, progressBarVisible = false)
             }
         }
     }
 
-    private fun sendUiState(
-        progressBarVisible: Boolean? = null,
-        books: List<Book>? = null
-    ) {
-        val previousUiState = _uiState.value ?: UiState()
-        val nextUiState = UiState(if (books != null) BookListAdapter(books) else previousUiState.adapter)
-        _uiState.value = nextUiState
-    }
-
-    data class UiState(val adapter: BookListAdapter? = null)
+    data class UiState(val books: List<Book> = emptyList(), val progressBarVisible: Boolean = false)
 }

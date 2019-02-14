@@ -16,12 +16,21 @@
                 android:id="@+id/books_rv"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:adapter="@{viewModel.uiState.adapter}"
+                app:bookListAdapter="@{viewModel.uiState.books}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+
+        <ProgressBar
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="@{viewModel.uiState.progressBarVisible}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
