@@ -15,14 +15,14 @@ class BookListFragment : BaseFragment() {
         private const val ARG_QUERY = "com.github.michalchojnacki.findbook.ui.booklistBookListFragment.ARG_QUERY"
 
         fun newInstance(query: String) =
-            BookListFragment().apply { arguments = Bundle().apply { putString(ARG_QUERY, query) } }
+                BookListFragment().apply { arguments = Bundle().apply { putString(ARG_QUERY, query) } }
     }
 
     private val viewModel: BookListViewModel by viewModel { parametersOf(arguments!!.getString(ARG_QUERY)) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.book_list_fragment, container, false)
     }

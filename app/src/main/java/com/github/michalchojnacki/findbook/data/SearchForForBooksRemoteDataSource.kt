@@ -7,16 +7,16 @@ import kotlinx.coroutines.CoroutineDispatcher
 import java.io.IOException
 
 class SearchForForBooksRemoteDataSource(
-    private val service: SearchForBooksService,
-    private val booksMapper: BooksMapper,
-    private val coroutineDispatcher: CoroutineDispatcher
+        private val service: SearchForBooksService,
+        private val booksMapper: BooksMapper,
+        private val coroutineDispatcher: CoroutineDispatcher
 ) : SearchForBooksDataSource {
     override suspend fun searchForBooksWithQuery(query: String): Result<List<Book>> =
-        safeApiCall(
-            coroutineDispatcher,
-            call = { requestSearchForBooksWithQuery(query) },
-            errorMessage = "Error searching for books with $query!"
-        )
+            safeApiCall(
+                    coroutineDispatcher,
+                    call = { requestSearchForBooksWithQuery(query) },
+                    errorMessage = "Error searching for books with $query!"
+            )
 
     private suspend fun requestSearchForBooksWithQuery(query: String): Result<List<Book>> {
         val response = retryIO { service.searchForBooksWithQuery(query).await() }
@@ -27,9 +27,9 @@ class SearchForForBooksRemoteDataSource(
             }
         }
         return Result.Error(
-            IOException(
-                "Connection problem!\nError code: ${response.code()},\nError message: ${response.message()}"
-            )
+                IOException(
+                        "Connection problem!\nError code: ${response.code()},\nError message: ${response.message()}"
+                )
         )
     }
 }

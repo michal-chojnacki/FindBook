@@ -10,9 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class BookListViewModel(
-    private val query: String,
-    private val searchForBooksWithQuery: SearchForBooksWithQueryUseCase,
-    coroutineDispatcher: CoroutineDispatcher
+        private val query: String,
+        private val searchForBooksWithQuery: SearchForBooksWithQueryUseCase,
+        coroutineDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
     private val scope = CoroutineScope(parentJob + coroutineDispatcher)
     val uiState = MutableLiveData<UiState>().apply { value = UiState() }

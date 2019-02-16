@@ -6,6 +6,6 @@
    Q: "The new Android developer tools (21.1) are reporting many cases of invalid package references in the SimpleXML library jar"
    A: "Just ignore this, it should be a warning only, this references StAX which is not available on Android. SimpleXML will default to XmlPull"
     -->
-        <ignore path="**/simple-xml-2.7.1.jar"/>
+        <ignore path="**/simple-xml-2.7.1.jar" />
     </issue>
 </lint>

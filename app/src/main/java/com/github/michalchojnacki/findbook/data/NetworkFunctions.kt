@@ -21,11 +21,11 @@ suspend fun <T : Any> safeApiCall(coroutineDispatcher: CoroutineDispatcher, call
 }
 
 suspend fun <T : Any> retryIO(
-    times: Int = 3,
-    initialDelay: Long = 100, // 0.1 second
-    maxDelay: Long = 1000,    // 1 second
-    factor: Double = 2.0,
-    block: suspend () -> Response<T>): Response<T> {
+        times: Int = 3,
+        initialDelay: Long = 100, // 0.1 second
+        maxDelay: Long = 1000,    // 1 second
+        factor: Double = 2.0,
+        block: suspend () -> Response<T>): Response<T> {
     var currentDelay = initialDelay
     repeat(times - 1) {
         try {

@@ -8,9 +8,9 @@ class SigningInterceptor(private val apiKey: String) : Interceptor {
         var request = chain.request()
         if (request.method() == "GET") {
             val url = chain.request().url()
-                .newBuilder()
-                .addQueryParameter("key", apiKey)
-                .build()
+                    .newBuilder()
+                    .addQueryParameter("key", apiKey)
+                    .build()
             request = request.newBuilder().url(url).build()
         }
         return chain.proceed(request)
