@@ -17,7 +17,7 @@ class BookListAdapter(private val books: List<Book>) : RecyclerView.Adapter<Book
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.book = books[position]
+        holder.binding.viewModel = BookListItemViewModel(books[position])
     }
 
     override fun getItemCount() = books.size

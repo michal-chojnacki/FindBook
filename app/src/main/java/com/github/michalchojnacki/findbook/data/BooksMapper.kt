@@ -12,7 +12,7 @@ class BooksMapper {
                     ratingsCount = work.ratingsCount,
                     textReviewsCount = work.textReviewsCount,
                     originalPublicationYear = work.originalPublicationYear,
-                    averageRating = work.averageRating
+                averageRating = work.averageRating ?: 0.0
             )
         }?.filter { it.title.isNotBlank() && it.author.isNotBlank() } ?: emptyList()
     }

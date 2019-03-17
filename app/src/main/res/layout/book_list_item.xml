@@ -6,8 +6,8 @@
     <data>
 
         <variable
-                name="book"
-                type="com.github.michalchojnacki.findbook.domain.model.Book"/>
+                name="viewModel"
+                type="com.github.michalchojnacki.findbook.ui.booklist.BookListItemViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,46 +28,51 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:remoteSrc="@{book.imageUrl}"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemAuthor"
+                app:remoteSrc="@{viewModel.imageUrl}"
                 tools:src="@mipmap/ic_launcher"/>
+
+        <TextView
+                android:id="@+id/bookListItemAuthor"
+                android:layout_width="0dp"
+                android:text="@{viewModel.author}"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookListCover"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemTitle"
+                tools:text="Author" android:layout_marginTop="8dp"/>
 
         <TextView
                 android:id="@+id/bookListItemTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{book.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookListCover"
-                tools:text="Text title"/>
-
-        <TextView
-                android:id="@+id/bookListItemAuthor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{book.author}"
+                android:text="@{viewModel.title}"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
-                tools:text="Author"/>
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemAuthor"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemYear"
+                tools:text="Text title"/>
 
         <TextView
                 android:id="@+id/bookListItemYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{String.valueOf(book.originalPublicationYear)}"
+                android:text="@{viewModel.publicationYear}"
+                android:visibility="@{viewModel.hasPublicationYear}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookListItemAuthor"
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
                 tools:text="2019"/>
 
         <TextView
                 android:id="@+id/bookListItemRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@{String.valueOf(book.averageRating)}"
+                android:layout_marginEnd="2dp"
+                android:text="@{viewModel.averageRating}"
                 app:layout_constraintBottom_toBottomOf="@+id/bookListItemRatingIcon"
                 app:layout_constraintEnd_toStartOf="@+id/bookListItemRatingIcon"
                 app:layout_constraintTop_toTopOf="@+id/bookListItemRatingIcon"
@@ -78,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:text="@{String.valueOf(book.ratingsCount)}"
+                android:text="@{viewModel.ratingsCount}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/bookListItemRatingBarrier"
                 app:layout_constraintTop_toBottomOf="@+id/bookListItemRatingIcon"
@@ -91,8 +96,8 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/book_list_item_rating_icon_description"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookListItemAuthor"
-                app:srcCompat="@android:drawable/btn_star_big_on"/>
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
+                app:srcCompat="@drawable/ic_star"/>
 
         <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/bookListItemRatingBarrier"
