@@ -15,14 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"
+                  android:noHistory="true"/>
 
         <activity android:name=".ui.camera.OcrCaptureActivity"
-                  android:theme="@style/AppTheme.NoToolbar"/>
+                  android:noHistory="true"
+                  android:theme="@style/AppTheme.NoToolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
