@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_QUERY = "com.github.michalchojnacki.findbook.MainActivity.EXTRA_QUERY"
 
         @JvmOverloads
-        fun getCallingIntent(context: Context, query: String? = null): Intent =
+        fun getCallingIntent(context: Context, query: String? = null) =
             Intent(context, MainActivity::class.java).apply {
                 putExtra(EXTRA_QUERY, query)
             }
