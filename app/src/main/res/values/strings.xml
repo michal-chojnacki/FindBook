@@ -13,8 +13,11 @@
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
 
+    <string name="main_title">Find your book!</string>
     <string name="main_search">Search</string>
-    <string name="main_type_title">Type title…</string>
     <string name="main_search_with_camera">Search with camera</string>
+    <string name="main_type_title">Type title…</string>
+
+    <string name="book_list_title">Looking for: \"%s\"</string>
     <string name="book_list_item_rating_icon_description">Star icon</string>
 </resources>
