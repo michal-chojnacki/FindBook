@@ -1,6 +1,8 @@
 package com.github.michalchojnacki.findbook.ui.main
 
-import android.widget.EditText
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
@@ -11,7 +13,17 @@ class MainViewModel : BaseViewModel() {
     val uiResultLiveData: LiveData<Event<UiResult>>
         get() = _uiResultLiveData
 
-    fun onShowBookClick(queryEditText: EditText) {
+    val onEditorActionListener = object : TextView.OnEditorActionListener {
+        override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                onShowBookClick(v)
+                return true
+            }
+            return false
+        }
+    }
+
+    fun onShowBookClick(queryEditText: TextView) {
         queryEditText.text.toString().takeIf { it.isNotBlank() }?.let {
             _uiResultLiveData.postValue(Event(UiResult.ShowBookList(it)))
         }
