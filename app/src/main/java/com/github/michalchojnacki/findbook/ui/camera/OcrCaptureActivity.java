@@ -32,7 +32,10 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import com.github.michalchojnacki.findbook.MainActivity;
 import com.github.michalchojnacki.findbook.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -40,10 +43,6 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 /**
  * Activity for the Ocr Detecting app.  This app detects text and displays the value with the
@@ -72,20 +71,16 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.ocr_capture);
+        setContentView(R.layout.ocr_capture_activity);
 
         preview = findViewById(R.id.preview);
         graphicOverlay = findViewById(R.id.graphicOverlay);
-
-        // Set good defaults for capturing text.
-        boolean autoFocus = true;
-        boolean useFlash = false;
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
-            createCameraSource(autoFocus, useFlash);
+            createCameraSource(true, false);
         } else {
             requestCameraPermission();
         }
@@ -152,7 +147,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         textRecognizer.setProcessor(new OcrDetectorProcessor(graphicOverlay, new OcrOnTextDetectedListener() {
             @Override
             public void onTextDetected(@NonNull String text) {
-
+                startActivity(MainActivity.Companion.getCallingIntent(OcrCaptureActivity.this, text));
             }
         }));
 
@@ -298,6 +293,12 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 cameraSource = null;
             }
         }
+    }
+
+    public void goToTextSearch(View view) {
+        Intent intent = MainActivity.Companion.getCallingIntent(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
