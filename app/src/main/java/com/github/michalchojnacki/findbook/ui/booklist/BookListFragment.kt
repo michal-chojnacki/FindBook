@@ -18,7 +18,7 @@ class BookListFragment : BaseFragment() {
                 BookListFragment().apply { arguments = Bundle().apply { putString(ARG_QUERY, query) } }
     }
 
-    private val viewModel: BookListViewModel by viewModel { parametersOf(arguments!!.getString(ARG_QUERY)) }
+    private val viewModel: BookListViewModel by viewModel { parametersOf(arguments?.getString(ARG_QUERY) ?: "") }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
