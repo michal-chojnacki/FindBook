@@ -16,4 +16,5 @@
     <string name="main_search">Search</string>
     <string name="main_type_title">Type title…</string>
     <string name="main_search_with_camera">Search with camera</string>
+    <string name="book_list_item_rating_icon_description">Star icon</string>
 </resources>

@@ -29,11 +29,11 @@ class BooksSearchRawModel {
 
         @set:Element(name = "original_publication_year", required = false)
         @get:Element(name = "original_publication_year", required = false)
-        var originalPublicationYear: Int = 0
+        var originalPublicationYear: Int? = null
 
         @set:Element(name = "average_rating")
         @get:Element(name = "average_rating")
-        var averageRating: Double = 0.0
+        var averageRating: Double? = null
 
         @set:Element(name = "best_book")
         @get:Element(name = "best_book")

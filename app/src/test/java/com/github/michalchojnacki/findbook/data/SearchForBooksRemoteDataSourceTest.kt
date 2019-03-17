@@ -18,13 +18,13 @@ class SearchForBooksRemoteDataSourceTest {
     private val mockSearchForBooksService = mockk<SearchForBooksService>()
     private val booksMapper = BooksMapper()
     private val dataSource =
-        SearchForForBooksRemoteDataSource(mockSearchForBooksService, booksMapper, Dispatchers.Default)
+            SearchForForBooksRemoteDataSource(mockSearchForBooksService, booksMapper, Dispatchers.Default)
 
     @Test
     fun `test successful scenario`() = runBlocking {
         val fakeBooksSearchRawModel = fakeApiResultsProducer.produceBooksSearchRawModel()
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
-            .returns(async { Response.success(fakeBooksSearchRawModel) })
+                .returns(async { Response.success(fakeBooksSearchRawModel) })
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)
 
@@ -35,7 +35,7 @@ class SearchForBooksRemoteDataSourceTest {
     @Test
     fun `test unsuccessful scenario`() = runBlocking {
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
-            .returns(async { Response.error<BooksSearchRawModel>(500, mockk()) })
+                .returns(async { Response.error<BooksSearchRawModel>(500, mockk()) })
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)
 
@@ -48,16 +48,16 @@ class SearchForBooksRemoteDataSourceTest {
         val fakeBooksSearchRawModel = fakeApiResultsProducer.produceBooksSearchRawModel()
         var isFirstAttempt = true
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
-            .answers {
-                async {
-                    if (isFirstAttempt) {
-                        isFirstAttempt = false
-                        Response.error<BooksSearchRawModel>(500, mockk())
-                    } else {
-                        Response.success(fakeBooksSearchRawModel)
+                .answers {
+                    async {
+                        if (isFirstAttempt) {
+                            isFirstAttempt = false
+                            Response.error<BooksSearchRawModel>(500, mockk())
+                        } else {
+                            Response.success(fakeBooksSearchRawModel)
+                        }
                     }
                 }
-            }
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)
 

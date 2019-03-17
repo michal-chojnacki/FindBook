@@ -3,4 +3,16 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="book_list_item_rating_icon">@color/md_amber_500</color>
+    <color name="book_list_item_rating_45_50">@color/md_green_700</color>
+    <color name="book_list_item_rating_40_45">@color/md_green_500</color>
+    <color name="book_list_item_rating_35_40">@color/md_green_300</color>
+    <color name="book_list_item_rating_30_35">@color/md_yellow_300</color>
+    <color name="book_list_item_rating_25_30">@color/md_yellow_500</color>
+    <color name="book_list_item_rating_20_25">@color/md_yellow_700</color>
+    <color name="book_list_item_rating_15_20">@color/md_red_300</color>
+    <color name="book_list_item_rating_10_20">@color/md_red_500</color>
+    <color name="book_list_item_rating_00_10">@color/md_red_700</color>
 </resources>

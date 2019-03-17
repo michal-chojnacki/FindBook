@@ -24,7 +24,7 @@ class BooksMapperTest {
         val booksSearchRawModel = BooksSearchRawModel().apply {
             search = BooksSearchRawModel.Search().apply {
                 results = fakeApiResultsProducer.produceBooksSearchRawModel().search!!.results!!.toMutableList()
-                    .apply { add(BooksSearchRawModel.Work()) }
+                        .apply { add(BooksSearchRawModel.Work()) }
             }
         }
 

@@ -13,8 +13,8 @@ class BookRawModel {
     @get:Element
     var author: Author? = null
 
-    @set:Element(name="image_url")
-    @get:Element(name="image_url")
+    @set:Element(name = "image_url")
+    @get:Element(name = "image_url")
     var imageUrl: String? = null
 
     @Root(strict = false)

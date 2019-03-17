@@ -30,7 +30,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1474154022m/3.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1474154022s/3.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1474154022s/3.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -51,7 +52,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1499277281m/5.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1499277281s/5.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1499277281s/5.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -72,7 +74,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1474169725m/15881.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1474169725s/15881.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1474169725s/15881.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -93,7 +96,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1361482611m/6.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1361482611s/6.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1361482611s/6.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -114,7 +118,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1546910265m/2.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1546910265s/2.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1546910265s/2.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -135,7 +140,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1361039191m/1.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1361039191s/1.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1361039191s/1.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -150,13 +156,16 @@
                 <average_rating>3.68</average_rating>
                 <best_book type="Book">
                     <id type="integer">29056083</id>
-                    <title>Harry Potter and the Cursed Child: Parts One and Two (Harry Potter, #8)</title>
+                    <title>Harry Potter and the Cursed Child: Parts One and Two (Harry Potter, #8)
+                    </title>
                     <author>
                         <id type="integer">5042201</id>
                         <name>John Tiffany</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1470082995m/29056083.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1470082995s/29056083.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1470082995m/29056083.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1470082995s/29056083.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -177,7 +186,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1534298934m/862041.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1534298934s/862041.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1534298934s/862041.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -198,7 +208,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1474171184m/136251.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1474171184s/136251.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1474171184s/136251.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -218,8 +229,10 @@
                         <id type="integer">1077326</id>
                         <name>J.K. Rowling</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1456894457m/8933944.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1456894457s/8933944.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1456894457m/8933944.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1456894457s/8933944.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -240,7 +253,8 @@
                         <name>J.K. Rowling</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1328867351m/10.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1328867351s/10.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1328867351s/10.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -250,8 +264,8 @@
                 <ratings_count type="integer">51147</ratings_count>
                 <text_reviews_count type="integer">544</text_reviews_count>
                 <original_publication_year type="integer">2010</original_publication_year>
-                <original_publication_month type="integer" nil="true"/>
-                <original_publication_day type="integer" nil="true"/>
+                <original_publication_month nil="true" type="integer" />
+                <original_publication_day nil="true" type="integer" />
                 <average_rating>4.49</average_rating>
                 <best_book type="Book">
                     <id type="integer">7952502</id>
@@ -260,8 +274,10 @@
                         <id type="integer">4941</id>
                         <name>Brian Sibley</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1464452934m/7952502.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1464452934s/7952502.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1464452934m/7952502.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1464452934s/7952502.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -306,8 +322,10 @@
                         <id type="integer">1077326</id>
                         <name>J.K. Rowling</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1330972392m/2337379.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1330972392s/2337379.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1330972392m/2337379.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1330972392s/2337379.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -327,8 +345,10 @@
                         <id type="integer">208338</id>
                         <name>British Library</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1500670913m/35613533.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1500670913s/35613533.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1500670913m/35613533.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1500670913s/35613533.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -348,8 +368,10 @@
                         <id type="integer">4533716</id>
                         <name>Eliezer Yudkowsky</name>
                     </author>
-                    <image_url>https://images.gr-assets.com/books/1293582551m/10016013.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1293582551s/10016013.jpg</small_image_url>
+                    <image_url>https://images.gr-assets.com/books/1293582551m/10016013.jpg
+                    </image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1293582551s/10016013.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 
@@ -364,7 +386,8 @@
                 <average_rating>4.58</average_rating>
                 <best_book type="Book">
                     <id type="integer">1317181</id>
-                    <title>Harry Potter and the Order of the Phoenix (Harry Potter, #5, Part 1)</title>
+                    <title>Harry Potter and the Order of the Phoenix (Harry Potter, #5, Part 1)
+                    </title>
                     <author>
                         <id type="integer">1077326</id>
                         <name>J.K. Rowling</name>
@@ -384,8 +407,8 @@
                 <ratings_count type="integer">7215</ratings_count>
                 <text_reviews_count type="integer">49</text_reviews_count>
                 <original_publication_year type="integer">2006</original_publication_year>
-                <original_publication_month type="integer" nil="true"/>
-                <original_publication_day type="integer" nil="true"/>
+                <original_publication_month nil="true" type="integer" />
+                <original_publication_day nil="true" type="integer" />
                 <average_rating>4.37</average_rating>
                 <best_book type="Book">
                     <id type="integer">389547</id>
@@ -395,7 +418,8 @@
                         <name>David Langford</name>
                     </author>
                     <image_url>https://images.gr-assets.com/books/1312059991m/389547.jpg</image_url>
-                    <small_image_url>https://images.gr-assets.com/books/1312059991s/389547.jpg</small_image_url>
+                    <small_image_url>https://images.gr-assets.com/books/1312059991s/389547.jpg
+                    </small_image_url>
                 </best_book>
             </work>
 

@@ -17,6 +17,7 @@ package com.github.michalchojnacki.findbook.ui.camera;
 
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.github.michalchojnacki.findbook.ui.booklist.BookListItemViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_sm"
+            android:background="@color/md_white_1000"
+            android:clickable="true"
+            android:elevation="@dimen/margin_sm"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            android:padding="@dimen/margin_sm">
+
+        <ImageView
+                android:id="@+id/bookListCover"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemAuthor"
+                app:remoteSrc="@{viewModel.imageUrl}"
+                tools:src="@mipmap/ic_launcher"/>
+
+        <TextView
+                android:id="@+id/bookListItemAuthor"
+                android:layout_width="0dp"
+                android:text="@{viewModel.author}"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookListCover"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemTitle"
+                tools:text="Author"/>
+
+        <TextView
+                android:id="@+id/bookListItemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:text="@{viewModel.title}"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemAuthor"
+                app:layout_constraintBottom_toTopOf="@+id/bookListItemYear"
+                tools:text="Text title"/>
+
+        <TextView
+                android:id="@+id/bookListItemYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:text="@{viewModel.publicationYear}"
+                android:visibility="@{viewModel.hasPublicationYear}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
+                tools:text="2019"/>
+
+        <TextView
+                android:id="@+id/bookListItemRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_xxs"
+                android:text="@{viewModel.averageRating}"
+                app:textColorRes="@{viewModel.averageRatingTextColor}"
+                app:layout_constraintBottom_toBottomOf="@+id/bookListItemRatingIcon"
+                app:layout_constraintEnd_toStartOf="@+id/bookListItemRatingIcon"
+                app:layout_constraintTop_toTopOf="@+id/bookListItemRatingIcon"
+                android:textStyle="bold"
+                tools:textColor="@color/book_list_item_rating_40_45"
+                tools:text="4,19"/>
+
+        <TextView
+                android:id="@+id/bookListItemRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="@{viewModel.ratingsCount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bookListItemRatingBarrier"
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemRatingIcon"
+                tools:text="(2000)"/>
+
+        <ImageView
+                android:id="@+id/bookListItemRatingIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_sm"
+                android:contentDescription="@string/book_list_item_rating_icon_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
+                android:src="@drawable/ic_star"
+                android:tint="@color/book_list_item_rating_icon"/>
+
+        <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/bookListItemRatingBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="bookListItemRatingCount,bookListItemRating"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
