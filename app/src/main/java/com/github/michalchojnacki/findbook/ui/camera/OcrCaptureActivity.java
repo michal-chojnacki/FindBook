@@ -147,7 +147,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         textRecognizer.setProcessor(new OcrDetectorProcessor(graphicOverlay, new OcrOnTextDetectedListener() {
             @Override
             public void onTextDetected(@NonNull String text) {
-
+                startActivity(MainActivity.Companion.getCallingIntent(OcrCaptureActivity.this, text));
             }
         }));
 
@@ -296,7 +296,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     }
 
     public void goToTextSearch(View view) {
-        startActivity(MainActivity.Companion.getCallingIntent(this));
+        Intent intent = MainActivity.Companion.getCallingIntent(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {

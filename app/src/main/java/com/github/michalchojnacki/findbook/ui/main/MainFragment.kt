@@ -38,7 +38,9 @@ class MainFragment : BaseFragment() {
         viewModel.uiResultLiveData.observe(this, EventObserver {
             when (it) {
                 is MainViewModel.UiResult.ShowOcrScanner -> {
-                    startActivity(Intent(context, OcrCaptureActivity::class.java))
+                    startActivity(Intent(context, OcrCaptureActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    })
                 }
                 is MainViewModel.UiResult.ShowBookList -> {
                     fragmentManager?.transaction {
