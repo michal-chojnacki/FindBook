@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.MainFragmentBinding
 import com.github.michalchojnacki.findbook.ui.booklist.BookListFragment
@@ -26,9 +26,7 @@ class MainFragment : BaseFragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    ): View = inflater.inflate(R.layout.main_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +41,7 @@ class MainFragment : BaseFragment() {
                     })
                 }
                 is MainViewModel.UiResult.ShowBookList -> {
-                    fragmentManager?.transaction {
+                    fragmentManager?.commit {
                         addToBackStack(null)
                         replace(R.id.container, BookListFragment.newInstance(it.query))
                     }

@@ -32,11 +32,13 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import com.github.michalchojnacki.findbook.MainActivity;
+
 import com.github.michalchojnacki.findbook.R;
+import com.github.michalchojnacki.findbook.ui.main.MainActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.text.TextRecognizer;
@@ -147,7 +149,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         textRecognizer.setProcessor(new OcrDetectorProcessor(graphicOverlay, new OcrOnTextDetectedListener() {
             @Override
             public void onTextDetected(@NonNull String text) {
-                startActivity(MainActivity.Companion.getCallingIntent(OcrCaptureActivity.this, text));
+                startActivity(MainActivity.getCallingIntent(OcrCaptureActivity.this, text));
             }
         }));
 

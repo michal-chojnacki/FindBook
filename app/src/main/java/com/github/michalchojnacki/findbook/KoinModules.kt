@@ -8,8 +8,6 @@ import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
 import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
 import com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel
 import com.github.michalchojnacki.findbook.ui.main.MainViewModel
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -18,13 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 private val appModule = module {
-    single {
-        CoroutinesDispatcherProvider(
-                Dispatchers.Main,
-                Dispatchers.Default,
-                Dispatchers.IO
-        )
-    }
+
 }
 
 private val repositoryModule = module {
@@ -39,7 +31,6 @@ private val repositoryModule = module {
                 .baseUrl(androidContext().getString(R.string.api_service_url))
                 .client(get())
                 .addConverterFactory(SimpleXmlConverterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
     }
     single { get<Retrofit>().create(SearchForBooksService::class.java) }
@@ -50,15 +41,14 @@ private val searchForBooksModule = module {
     single<SearchForBooksDataSource> {
         SearchForForBooksRemoteDataSource(
                 get(),
-                get(),
-                get<CoroutinesDispatcherProvider>().io
+            get()
         )
     }
-    single { SearchForBooksWithQueryUseCase(get(), get<CoroutinesDispatcherProvider>().computation) }
+    single { SearchForBooksWithQueryUseCase(get()) }
 }
 
 private val bookListModule = module {
-    viewModel { (query: String) -> BookListViewModel(query, get(), get<CoroutinesDispatcherProvider>().main) }
+    viewModel { (query: String) -> BookListViewModel(query, get()) }
 }
 
 private val mainViewModule = module {
