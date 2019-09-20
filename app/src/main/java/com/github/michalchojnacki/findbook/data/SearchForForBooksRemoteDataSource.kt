@@ -3,9 +3,12 @@ package com.github.michalchojnacki.findbook.data
 import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
 import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.domain.model.Result
+import dagger.Reusable
 import java.io.IOException
+import javax.inject.Inject
 
-class SearchForForBooksRemoteDataSource(
+@Reusable
+class SearchForForBooksRemoteDataSource @Inject constructor(
     private val service: SearchForBooksService,
     private val booksMapper: BooksMapper
 ) : SearchForBooksDataSource {

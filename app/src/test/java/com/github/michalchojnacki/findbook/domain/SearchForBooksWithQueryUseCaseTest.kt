@@ -5,7 +5,6 @@ import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -20,7 +19,7 @@ class SearchForBooksWithQueryUseCaseTest {
 
     @Before
     fun setUp() {
-        searchForBooksWithQuery = SearchForBooksWithQueryUseCase(searchForBooksDataSource, Dispatchers.Default)
+        searchForBooksWithQuery = SearchForBooksWithQueryUseCase(searchForBooksDataSource)
     }
 
     @Test

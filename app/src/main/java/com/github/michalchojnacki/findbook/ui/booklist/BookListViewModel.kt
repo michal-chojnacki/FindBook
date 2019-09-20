@@ -6,13 +6,20 @@ import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
 import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.domain.model.Result
 import com.github.michalchojnacki.findbook.ui.common.NonNullMutableLiveData
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
 
-class BookListViewModel(
-    private val query: String,
+class BookListViewModel @AssistedInject constructor(
+    @Assisted private val query: String,
     private val searchForBooksWithQuery: SearchForBooksWithQueryUseCase
 ) : ViewModel() {
     val uiState = NonNullMutableLiveData(UiState())
+
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(query: String): BookListViewModel
+    }
 
     init {
         viewModelScope.launch {

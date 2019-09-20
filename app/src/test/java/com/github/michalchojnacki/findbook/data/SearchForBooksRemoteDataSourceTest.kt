@@ -4,12 +4,11 @@ import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Response
+import java.io.IOException
 
 private const val FAKE_QUERY = "fake_query"
 
@@ -18,13 +17,13 @@ class SearchForBooksRemoteDataSourceTest {
     private val mockSearchForBooksService = mockk<SearchForBooksService>()
     private val booksMapper = BooksMapper()
     private val dataSource =
-            SearchForForBooksRemoteDataSource(mockSearchForBooksService, booksMapper, Dispatchers.Default)
+        SearchForForBooksRemoteDataSource(mockSearchForBooksService, booksMapper)
 
     @Test
     fun `test successful scenario`() = runBlocking {
         val fakeBooksSearchRawModel = fakeApiResultsProducer.produceBooksSearchRawModel()
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
-                .returns(async { Response.success(fakeBooksSearchRawModel) })
+            .returns(Response.success(fakeBooksSearchRawModel))
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)
 
@@ -35,7 +34,7 @@ class SearchForBooksRemoteDataSourceTest {
     @Test
     fun `test unsuccessful scenario`() = runBlocking {
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
-                .returns(async { Response.error<BooksSearchRawModel>(500, mockk()) })
+            .answers { throw IOException("Fake exception") }
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)
 
@@ -49,14 +48,12 @@ class SearchForBooksRemoteDataSourceTest {
         var isFirstAttempt = true
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
                 .answers {
-                    async {
                         if (isFirstAttempt) {
                             isFirstAttempt = false
-                            Response.error<BooksSearchRawModel>(500, mockk())
+                            throw IOException("Fake exception")
                         } else {
                             Response.success(fakeBooksSearchRawModel)
                         }
-                    }
                 }
 
         val result = dataSource.searchForBooksWithQuery(FAKE_QUERY)

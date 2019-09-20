@@ -12,8 +12,10 @@ import com.github.michalchojnacki.findbook.ui.booklist.BookListFragment
 import com.github.michalchojnacki.findbook.ui.camera.OcrCaptureActivity
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
 import com.github.michalchojnacki.findbook.ui.common.EventObserver
+import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
+import com.github.michalchojnacki.findbook.ui.di.injector
 import com.github.michalchojnacki.findbook.util.exhaustive
-import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class MainFragment : BaseFragment() {
 
@@ -21,7 +23,7 @@ class MainFragment : BaseFragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel { injector.mainViewModel }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
