@@ -3,23 +3,23 @@ package com.github.michalchojnacki.findbook.data
 import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
 import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.domain.model.Result
-import kotlinx.coroutines.CoroutineDispatcher
+import dagger.Reusable
 import java.io.IOException
+import javax.inject.Inject
 
-class SearchForForBooksRemoteDataSource(
-        private val service: SearchForBooksService,
-        private val booksMapper: BooksMapper,
-        private val coroutineDispatcher: CoroutineDispatcher
+@Reusable
+class SearchForForBooksRemoteDataSource @Inject constructor(
+    private val service: SearchForBooksService,
+    private val booksMapper: BooksMapper
 ) : SearchForBooksDataSource {
     override suspend fun searchForBooksWithQuery(query: String): Result<List<Book>> =
             safeApiCall(
-                    coroutineDispatcher,
                     call = { requestSearchForBooksWithQuery(query) },
                     errorMessage = "Error searching for books with $query!"
             )
 
     private suspend fun requestSearchForBooksWithQuery(query: String): Result<List<Book>> {
-        val response = retryIO { service.searchForBooksWithQuery(query).await() }
+        val response = retryIO { service.searchForBooksWithQuery(query) }
         if (response.isSuccessful) {
             val body = response.body()
             if (body != null) {

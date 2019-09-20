@@ -1,11 +1,12 @@
 package com.github.michalchojnacki.findbook
 
 import android.app.Application
-import org.koin.android.ext.android.startKoin
+import com.github.michalchojnacki.findbook.ui.di.DaggerApplicationComponent
+import com.github.michalchojnacki.findbook.ui.di.InjectorProvider
 
-class FindBookApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        startKoin(this, appModules)
+class FindBookApplication : Application(), InjectorProvider {
+
+    override val component by lazy {
+        DaggerApplicationComponent.factory().create(applicationContext)
     }
 }

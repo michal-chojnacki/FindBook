@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.BookListFragmentBinding
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
+import com.github.michalchojnacki.findbook.ui.di.injector
 
 class BookListFragment : BaseFragment() {
     companion object {
@@ -18,7 +18,11 @@ class BookListFragment : BaseFragment() {
             BookListFragment().apply { arguments = Bundle().apply { putString(ARG_QUERY, query) } }
     }
 
-    private val viewModel: BookListViewModel by viewModel { parametersOf(queryArg) }
+    private val viewModel: BookListViewModel by viewModel {
+        injector.bookListViewModelFactory.create(
+            query = queryArg
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,8 +1,11 @@
 package com.github.michalchojnacki.findbook.data
 
 import com.github.michalchojnacki.findbook.domain.model.Book
+import dagger.Reusable
+import javax.inject.Inject
 
-class BooksMapper {
+@Reusable
+class BooksMapper @Inject constructor() {
     fun map(booksSearchRawModel: BooksSearchRawModel): List<Book> {
         return booksSearchRawModel.search?.results?.map { work ->
             Book(

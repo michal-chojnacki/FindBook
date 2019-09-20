@@ -14,7 +14,7 @@ class BooksMapperTest {
         val books = booksMapper.map(booksSearchRawModel)
 
         Assert.assertEquals(booksSearchRawModel.search!!.results!!.size, books.size)
-        for (i in 0..(books.size - 1)) {
+        for (i in books.indices) {
             Assert.assertEquals(booksSearchRawModel.search!!.results!![i].bestBook!!.title, books[i].title)
         }
     }
@@ -31,7 +31,7 @@ class BooksMapperTest {
         val books = booksMapper.map(booksSearchRawModel)
 
         Assert.assertEquals(booksSearchRawModel.search!!.results!!.size - 1, books.size)
-        for (i in 0..(books.size - 1)) {
+        for (i in books.indices) {
             Assert.assertEquals(booksSearchRawModel.search!!.results!![i].bestBook!!.title, books[i].title)
         }
     }

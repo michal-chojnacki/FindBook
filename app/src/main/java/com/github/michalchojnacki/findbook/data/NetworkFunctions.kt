@@ -2,6 +2,7 @@ package com.github.michalchojnacki.findbook.data
 
 import com.github.michalchojnacki.findbook.domain.model.Result
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -11,7 +12,11 @@ import java.io.IOException
  * Wrap a suspending API [call] in try/catch. In case an exception is thrown, a [Result.Error] is
  * created based on the [errorMessage].
  */
-suspend fun <T : Any> safeApiCall(coroutineDispatcher: CoroutineDispatcher, call: suspend () -> Result<T>, errorMessage: String): Result<T> {
+suspend fun <T : Any> safeApiCall(
+    coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    call: suspend () -> Result<T>,
+    errorMessage: String
+): Result<T> {
     return try {
         withContext(context = coroutineDispatcher) { call() }
     } catch (e: Exception) {
@@ -21,16 +26,18 @@ suspend fun <T : Any> safeApiCall(coroutineDispatcher: CoroutineDispatcher, call
 }
 
 suspend fun <T : Any> retryIO(
-        times: Int = 3,
-        initialDelay: Long = 100, // 0.1 second
-        maxDelay: Long = 1000,    // 1 second
-        factor: Double = 2.0,
-        block: suspend () -> Response<T>): Response<T> {
+    times: Int = 3,
+    initialDelay: Long = 100, // 0.1 second
+    maxDelay: Long = 1000,    // 1 second
+    factor: Double = 2.0,
+    successfulCodesRange: IntRange = 200..499,
+    block: suspend () -> Response<T>
+): Response<T> {
     var currentDelay = initialDelay
     repeat(times - 1) {
         try {
             val result = block()
-            if (result.isSuccessful) {
+            if (result.code() in successfulCodesRange) {
                 return result
             }
         } catch (e: IOException) {

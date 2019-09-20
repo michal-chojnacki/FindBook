@@ -4,7 +4,7 @@ import androidx.annotation.ColorRes
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.domain.model.Book
 
-class BookListItemViewModel(private val book: Book) {
+class BookListItemViewModel(book: Book) {
     val imageUrl = book.imageUrl
     val author = book.author
     val title = book.title

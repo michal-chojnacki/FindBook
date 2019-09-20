@@ -7,8 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
 import com.github.michalchojnacki.findbook.ui.common.Event
+import javax.inject.Inject
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel @Inject constructor() : BaseViewModel() {
     private val _uiResultLiveData = MutableLiveData<Event<UiResult>>()
     val uiResultLiveData: LiveData<Event<UiResult>>
         get() = _uiResultLiveData
