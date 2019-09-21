@@ -6,7 +6,8 @@ class FakeApiResultsProducer {
     private val serializer = Persister()
 
     fun produceBooksSearchRawModel(): BooksSearchRawModel {
-        val fakeResponseAsString = javaClass.classLoader.getResourceAsStream("books_response.xml")
+        val fakeResponseAsString =
+            javaClass.classLoader.getResourceAsStream("fakeApi/books_successful_response.xml")
         return serializer.read(BooksSearchRawModel::class.java, fakeResponseAsString)
     }
 }

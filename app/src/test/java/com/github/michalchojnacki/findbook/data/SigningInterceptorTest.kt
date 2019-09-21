@@ -32,8 +32,8 @@ class SigningInterceptorTest {
         signingInterceptor.intercept(mockInterceptorChain)
 
         coVerify(exactly = 1) { mockInterceptorChain.proceed(any()) }
-        Assert.assertEquals(FAKE_API_KEY, requestSlot.captured.url().queryParameterValue(0))
-        Assert.assertEquals(1, requestSlot.captured.url().querySize())
+        Assert.assertEquals(FAKE_API_KEY, requestSlot.captured.url.queryParameterValue(0))
+        Assert.assertEquals(1, requestSlot.captured.url.querySize)
     }
 
     @Test
@@ -43,6 +43,6 @@ class SigningInterceptorTest {
         signingInterceptor.intercept(mockInterceptorChain)
 
         coVerify(exactly = 1) { mockInterceptorChain.proceed(any()) }
-        Assert.assertEquals(0, requestSlot.captured.url().querySize())
+        Assert.assertEquals(0, requestSlot.captured.url.querySize)
     }
 }

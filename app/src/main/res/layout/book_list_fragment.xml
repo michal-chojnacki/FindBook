@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel"/>
+                type="com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,7 @@
                 android:layout_height="0dp"
                 android:paddingTop="@dimen/margin_sm"
                 app:bookListAdapter="@{viewModel.uiState.books}"
+                app:requestManager="@{viewModel.requestManager}"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,11 +33,13 @@
         <TextView
                 android:id="@+id/books_error_tv"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xlg"
+                android:layout_marginEnd="@dimen/margin_xlg"
                 android:layout_marginBottom="@dimen/margin_lg"
-                android:text="@string/book_list_error"
-                android:visibility="@{viewModel.uiState.error}"
+                android:gravity="center"
+                app:textRes="@{viewModel.uiState.errorRes}"
                 app:layout_constraintBottom_toTopOf="@+id/books_retry_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{_ -> viewModel.onRetryClick()}"
                 android:text="@string/scanner_common_retry"
-                android:visibility="@{viewModel.uiState.error}"
+                android:visibility="@{viewModel.uiState.retryPossible}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +68,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

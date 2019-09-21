@@ -27,6 +27,21 @@ android {
     dataBinding {
         enabled = true
     }
+
+    flavorDimensions "api"
+
+    productFlavors {
+        apiMock {
+            dimension "api"
+            applicationIdSuffix ".mock"
+            versionNameSuffix " - mock"
+        }
+
+        apiProduction {
+            dimension "api"
+        }
+    }
+
 }
 
 static def getApiKey() {
