@@ -1,18 +1,26 @@
 package com.github.michalchojnacki.findbook.domain
 
+import com.github.michalchojnacki.findbook.di.DaggerTestAppComponent
 import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 import java.io.IOException
+import javax.inject.Inject
 
 class CapturedTextValidUseCaseTest {
     private val mockSearchForBooksDataSource: SearchForBooksDataSource = mockk()
-    private val capturedTextValidUseCase =
-        CapturedTextValidUseCase(SearchForBooksWithQueryUseCase(mockSearchForBooksDataSource))
+    @Inject
+    lateinit var capturedTextValidUseCase: CapturedTextValidUseCase
+
+    @Before
+    fun setUp() {
+        DaggerTestAppComponent.factory().create(mockSearchForBooksDataSource).inject(this)
+    }
 
     @Test
     fun `test when data is valid`() = runBlocking {
