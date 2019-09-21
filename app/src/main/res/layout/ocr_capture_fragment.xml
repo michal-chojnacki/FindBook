@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +7,7 @@
         android:keepScreenOn="true">
 
     <com.github.michalchojnacki.findbook.ui.camera.CameraSourcePreview
-            android:id="@+id/preview"
+            android:id="@+id/scannerPreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -17,13 +16,14 @@
             app:layout_constraintEnd_toEndOf="parent">
 
         <com.github.michalchojnacki.findbook.ui.camera.GraphicOverlay
-                android:id="@+id/graphicOverlay"
+                android:id="@+id/scannerOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
     </com.github.michalchojnacki.findbook.ui.camera.CameraSourcePreview>
 
     <Button
+            android:id="@+id/scannerGoToSearchTextBtn"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,6 @@
             android:textColor="@color/md_white_1000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="goToTextSearch"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

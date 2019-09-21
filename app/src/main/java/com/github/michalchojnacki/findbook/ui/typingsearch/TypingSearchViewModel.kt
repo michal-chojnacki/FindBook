@@ -1,4 +1,4 @@
-package com.github.michalchojnacki.findbook.ui.main
+package com.github.michalchojnacki.findbook.ui.typingsearch
 
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
@@ -9,23 +9,26 @@ import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
 import com.github.michalchojnacki.findbook.ui.common.Event
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor() : BaseViewModel() {
-    private val _uiResultLiveData = MutableLiveData<Event<UiResult>>()
+class TypingSearchViewModel @Inject constructor() : BaseViewModel() {
+    val queryText = MutableLiveData<String>()
+
     val uiResultLiveData: LiveData<Event<UiResult>>
         get() = _uiResultLiveData
 
     val onEditorActionListener = object : TextView.OnEditorActionListener {
         override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                onShowBookClick(v)
+                onShowBookClick()
                 return true
             }
             return false
         }
     }
 
-    fun onShowBookClick(queryEditText: TextView) {
-        queryEditText.text.toString().takeIf { it.isNotBlank() }?.let {
+    private val _uiResultLiveData = MutableLiveData<Event<UiResult>>()
+
+    fun onShowBookClick() {
+        queryText.value?.takeIf { it.isNotBlank() }?.let {
             _uiResultLiveData.postValue(Event(UiResult.ShowBookList(it)))
         }
     }

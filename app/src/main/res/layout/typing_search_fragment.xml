@@ -7,18 +7,18 @@
 
         <variable
                 name="viewModel"
-                type="com.github.michalchojnacki.findbook.ui.main.MainViewModel"/>
+                type="com.github.michalchojnacki.findbook.ui.typingsearch.TypingSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.main.MainFragment">
+            tools:context=".ui.typingsearch.TypingSearchFragment">
 
         <Button
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:id="@+id/mainSearchWithOcrBtn"
+                android:id="@+id/typingSearchWithOcrBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{_ -> viewModel.onSearchForOcrClick()}"
@@ -29,14 +29,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainSearchWithTextBtn"
+                app:layout_constraintTop_toBottomOf="@+id/typingSearchWithTextBtn"
                 app:layout_constraintVertical_bias="1.0"/>
 
         <Button
-                android:id="@+id/mainSearchWithTextBtn"
+                android:id="@+id/typingSearchWithTextBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{_ -> viewModel.onShowBookClick(mainSearchWithTextEt)}"
+                android:onClick="@{_ -> viewModel.onShowBookClick()}"
                 android:text="@string/main_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
-                android:id="@+id/mainSearchWithTextEt"
+                android:id="@+id/typingSearchWithTextEt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_xl"
@@ -54,15 +54,16 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:ems="20"
-                android:hint="@string/main_type_title"
+                android:hint="@string/typing_search_title"
+                android:text="@={viewModel.queryText}"
                 app:onEditorActionListener="@{viewModel.onEditorActionListener}"
-                app:layout_constraintBottom_toTopOf="@+id/mainSearchWithTextBtn"
+                app:layout_constraintBottom_toTopOf="@+id/typingSearchWithTextBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-                android:id="@+id/mainSearchTitleTv"
+                android:id="@+id/typingSearchTitleTv"
                 android:text="@string/main_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
                 android:layout_marginEnd="@dimen/margin_sm"
                 android:layout_marginStart="@dimen/margin_sm"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/mainSearchWithTextEt"
+                app:layout_constraintBottom_toTopOf="@+id/typingSearchWithTextEt"
                 app:layout_constraintVertical_bias="0.33"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
