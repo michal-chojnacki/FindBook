@@ -32,4 +32,8 @@ class SearchForForBooksRemoteDataSource @Inject constructor(
                 )
         )
     }
+
+    override suspend fun saveBooks(query: String, books: List<Book>) {
+        throw UnsupportedOperationException()
+    }
 }

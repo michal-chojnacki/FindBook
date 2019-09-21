@@ -5,4 +5,6 @@ import com.github.michalchojnacki.findbook.domain.model.Result
 
 interface SearchForBooksDataSource {
     suspend fun searchForBooksWithQuery(query: String): Result<List<Book>>
+
+    suspend fun saveBooks(query: String, books: List<Book>)
 }

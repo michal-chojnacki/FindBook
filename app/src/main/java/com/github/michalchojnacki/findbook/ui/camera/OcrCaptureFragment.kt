@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
+import com.github.michalchojnacki.findbook.ui.common.EventObserver
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.activityViewModel
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
 import com.github.michalchojnacki.findbook.ui.di.injector
@@ -66,6 +67,12 @@ class OcrCaptureFragment : BaseFragment() {
 
         view.setOnTouchListener { _, event -> scaleGestureDetector.onTouchEvent(event) }
         scannerGoToSearchTextBtn.setOnClickListener { navigationViewModel.showTypingSearch() }
+        viewModel.onValidatedTextLiveData.observe(this, EventObserver { query ->
+            run {
+                navigationViewModel.showBookList(query)
+                viewModel.onValidatedTextLiveData.removeObservers(this)
+            }
+        })
     }
 
     /**
@@ -106,8 +113,7 @@ class OcrCaptureFragment : BaseFragment() {
 
         val textRecognizer = TextRecognizer.Builder(context).build()
         textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay, OcrOnTextDetectedListener {
-            it.takeIf { viewModel.validateText(it) }
-                ?.let { query -> navigationViewModel.showBookList(query) }
+            viewModel.onTextDetected(it)
         }))
 
         if (!textRecognizer.isOperational) {
