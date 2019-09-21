@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.BookListFragmentBinding
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
@@ -20,6 +21,7 @@ class BookListFragment : BaseFragment() {
 
     private val viewModel: BookListViewModel by viewModel {
         injector.bookListViewModelFactory.create(
+            requestManager = Glide.with(this),
             query = queryArg
         )
     }

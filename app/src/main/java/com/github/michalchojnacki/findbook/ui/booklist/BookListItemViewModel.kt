@@ -1,10 +1,11 @@
 package com.github.michalchojnacki.findbook.ui.booklist
 
 import androidx.annotation.ColorRes
+import com.bumptech.glide.RequestManager
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.domain.model.Book
 
-class BookListItemViewModel(book: Book) {
+class BookListItemViewModel(val requestManager: RequestManager, book: Book) {
     val imageUrl = book.imageUrl
     val author = book.author
     val title = book.title

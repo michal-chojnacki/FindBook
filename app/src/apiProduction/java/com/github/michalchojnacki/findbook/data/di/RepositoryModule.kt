@@ -3,9 +3,8 @@ package com.github.michalchojnacki.findbook.data.di
 import android.content.Context
 import com.github.michalchojnacki.findbook.BuildConfig
 import com.github.michalchojnacki.findbook.R
-import com.github.michalchojnacki.findbook.data.*
-import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
-import dagger.Binds
+import com.github.michalchojnacki.findbook.data.SearchForBooksService
+import com.github.michalchojnacki.findbook.data.SigningInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -14,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import javax.inject.Singleton
 
-@Module(includes = [RepositoryModule.BindsModule::class])
+@Module(includes = [RepositoryBindsModule::class])
 class RepositoryModule {
 
     @Provides
@@ -38,17 +37,4 @@ class RepositoryModule {
     fun provideSearchForBooksService(retrofit: Retrofit): SearchForBooksService =
         retrofit.create(SearchForBooksService::class.java)
 
-    @Module
-    interface BindsModule {
-        @Binds
-        @Remote
-        fun provideSearchForForBooksRemoteDataSource(searchForBooksRepository: SearchForForBooksRemoteDataSource): SearchForBooksDataSource
-
-        @Binds
-        @Local
-        fun provideSearchForForBooksLocalDataSource(searchForForBooksLocalDataSource: SearchForForBooksLocalDataSource): SearchForBooksDataSource
-
-        @Binds
-        fun provideSearchForBooksRepository(searchForBooksRepository: SearchForBooksRepository): SearchForBooksDataSource
-    }
 }

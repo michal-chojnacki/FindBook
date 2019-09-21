@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.BookListItemBinding
 import com.github.michalchojnacki.findbook.domain.model.Book
 
-class BookListAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
+class BookListAdapter(private val requestManager: RequestManager, private val books: List<Book>) :
+    RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
     class ViewHolder(val binding: BookListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,13 +19,13 @@ class BookListAdapter(private val books: List<Book>) : RecyclerView.Adapter<Book
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.viewModel = BookListItemViewModel(books[position])
+        holder.binding.viewModel = BookListItemViewModel(requestManager, books[position])
     }
 
     override fun getItemCount() = books.size
 }
 
-@BindingAdapter("bookListAdapter")
-fun RecyclerView.bindBookListAdapter(books: List<Book>) {
-    adapter = BookListAdapter(books)
+@BindingAdapter("requestManager", "bookListAdapter", requireAll = true)
+fun RecyclerView.bindBookListAdapter(requestManager: RequestManager, books: List<Book>) {
+    adapter = BookListAdapter(requestManager, books)
 }
