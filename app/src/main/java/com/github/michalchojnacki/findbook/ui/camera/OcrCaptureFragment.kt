@@ -88,9 +88,9 @@ class OcrCaptureFragment : BaseFragment() {
             return
         }
 
-        AlertDialog.Builder(context).setTitle(R.string.no_camera_permission_title)
-            .setMessage(R.string.permission_camera_rationale)
-            .setPositiveButton(R.string.ok) { _, _ ->
+        AlertDialog.Builder(context).setTitle(R.string.scanner_no_camera_permission_title)
+            .setMessage(R.string.scanner_permission_camera_rationale)
+            .setPositiveButton(R.string.common_ok) { _, _ ->
                 requestPermissions(permissions, RC_HANDLE_CAMERA_PERM)
             }.show()
     }
@@ -118,7 +118,8 @@ class OcrCaptureFragment : BaseFragment() {
                 context.cacheDir?.let { cacheDir -> cacheDir.usableSpace * 100 / cacheDir.totalSpace <= 10 }
                     ?: false
             if (hasLowStorage) {
-                Toast.makeText(context, R.string.low_storage_error, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.scanner_low_storage_error, Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -187,9 +188,9 @@ class OcrCaptureFragment : BaseFragment() {
             return
         }
 
-        AlertDialog.Builder(context).setTitle(R.string.no_camera_permission_title)
-            .setMessage(R.string.no_camera_permission_msg)
-            .setPositiveButton(R.string.ok) { _, _ ->
+        AlertDialog.Builder(context).setTitle(R.string.scanner_no_camera_permission_title)
+            .setMessage(R.string.scanner_no_camera_permission_msg)
+            .setPositiveButton(R.string.common_ok) { _, _ ->
                 navigationViewModel.showTypingSearch(becauseOfNoCameraPermission = true)
             }.show()
     }

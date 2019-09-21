@@ -6,6 +6,7 @@ import com.github.michalchojnacki.findbook.domain.SearchForBooksWithQueryUseCase
 import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.domain.model.Result
 import com.github.michalchojnacki.findbook.ui.common.NonNullMutableLiveData
+import com.github.michalchojnacki.findbook.util.exhaustive
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
@@ -22,14 +23,28 @@ class BookListViewModel @AssistedInject constructor(
     }
 
     init {
+        loadData()
+    }
+
+    private fun loadData() {
         viewModelScope.launch {
-            uiState.value = uiState.value.copy(progressBarVisible = true)
-            val result = searchForBooksWithQuery(query)
-            if (result is Result.Success) {
-                uiState.value = uiState.value.copy(books = result.data, progressBarVisible = false)
-            }
+            uiState.value = uiState.value.copy(progressBarVisible = true, error = false)
+            when (val result = searchForBooksWithQuery(query)) {
+                is Result.Success -> uiState.value =
+                    UiState(books = result.data, progressBarVisible = false, error = false)
+                is Result.Error -> uiState.value =
+                    UiState(books = emptyList(), progressBarVisible = false, error = true)
+            }.exhaustive
         }
     }
 
-    data class UiState(val books: List<Book> = emptyList(), val progressBarVisible: Boolean = false)
+    fun onRetryClick() {
+        loadData()
+    }
+
+    data class UiState(
+        val books: List<Book> = emptyList(),
+        val progressBarVisible: Boolean = false,
+        val error: Boolean = false
+    )
 }

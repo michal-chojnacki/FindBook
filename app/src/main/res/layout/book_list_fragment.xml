@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -25,7 +26,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="2"/>
+                app:spanCount="2"
+                tools:listitem="@layout/book_list_item" />
+
+        <TextView
+                android:id="@+id/books_error_tv"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_lg"
+                android:text="@string/book_list_error"
+                android:visibility="@{viewModel.uiState.error}"
+                app:layout_constraintBottom_toTopOf="@+id/books_retry_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:visibility="gone" />
+
+        <Button
+                android:id="@+id/books_retry_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{_ -> viewModel.onRetryClick()}"
+                android:text="@string/scanner_common_retry"
+                android:visibility="@{viewModel.uiState.error}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/books_error_tv"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:visibility="gone" />
 
         <ProgressBar
                 android:layout_width="@dimen/progress_bar_size"

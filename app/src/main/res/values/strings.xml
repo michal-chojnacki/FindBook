@@ -1,18 +1,20 @@
 <resources>
     <string name="app_name">FindBook</string>
-    <string name="ok">OK</string>
-    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
-    <string name="no_camera_permission_title">Warning!</string>
-    <string name="no_camera_permission_msg">OCR scanner cannot run because it does not have the camera permission.</string>
-    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
-    <string name="title_activity_main">Ocr Detector Sample</string>
-    <string name="ocr_search_with_text">Search with text</string>
+    <string name="common_ok">OK</string>
 
-    <string name="main_title">Find your book!</string>
-    <string name="main_search">Search</string>
-    <string name="main_search_with_camera">Search with camera</string>
-    <string name="typing_search_title">Type title…</string>
+    <string name="scanner_common_retry">Retry</string>
+    <string name="scanner_permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="scanner_no_camera_permission_title">Warning!</string>
+    <string name="scanner_no_camera_permission_msg">OCR scanner cannot run because it does not have the camera permission.</string>
+    <string name="scanner_low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="scanner_ocr_search_with_text">Search with text</string>
+
+    <string name="typing_search_title">Find your book!</string>
+    <string name="typing_search_search">Search</string>
+    <string name="typing_search_search_with_camera">Search with camera</string>
+    <string name="typing_search_type_title">Type title…</string>
 
     <string name="book_list_title">Looking for: \"%s\"</string>
     <string name="book_list_item_rating_icon_description">Star icon</string>
+    <string name="book_list_error">Ooops! Something went wrong!</string>
 </resources>
