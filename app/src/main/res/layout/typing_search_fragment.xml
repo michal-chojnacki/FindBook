@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{_ -> viewModel.onSearchForOcrClick()}"
-                android:text="@string/main_search_with_camera"
+                android:text="@string/typing_search_search_with_camera"
                 android:layout_marginBottom="@dimen/margin_sm"
                 android:layout_marginTop="@dimen/margin_sm"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{_ -> viewModel.onShowBookClick()}"
-                android:text="@string/main_search"
+                android:text="@string/typing_search_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,17 +54,20 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:ems="20"
-                android:hint="@string/typing_search_title"
+                android:hint="@string/typing_search_type_title"
                 android:text="@={viewModel.queryText}"
                 app:onEditorActionListener="@{viewModel.onEditorActionListener}"
                 app:layout_constraintBottom_toTopOf="@+id/typingSearchWithTextBtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent">
+
+            <requestFocus />
+        </EditText>
 
         <TextView
                 android:id="@+id/typingSearchTitleTv"
-                android:text="@string/main_title"
+                android:text="@string/typing_search_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
