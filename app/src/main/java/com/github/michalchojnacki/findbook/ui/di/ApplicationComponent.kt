@@ -3,7 +3,9 @@ package com.github.michalchojnacki.findbook.ui.di
 import android.content.Context
 import com.github.michalchojnacki.findbook.data.di.RepositoryModule
 import com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel
-import com.github.michalchojnacki.findbook.ui.main.MainViewModel
+import com.github.michalchojnacki.findbook.ui.camera.OcrCaptureViewModel
+import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
+import com.github.michalchojnacki.findbook.ui.typingsearch.TypingSearchViewModel
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.BindsInstance
 import dagger.Component
@@ -19,9 +21,13 @@ interface ApplicationComponent {
         fun create(@BindsInstance applicationContext: Context): ApplicationComponent
     }
 
+    val mainNavigationViewModel: MainNavigationViewModel
+
     val bookListViewModelFactory: BookListViewModel.Factory
 
-    val mainViewModel: MainViewModel
+    val typingSearchViewModel: TypingSearchViewModel
+
+    val ocrCaptureViewModel: OcrCaptureViewModel
 }
 
 @AssistedModule

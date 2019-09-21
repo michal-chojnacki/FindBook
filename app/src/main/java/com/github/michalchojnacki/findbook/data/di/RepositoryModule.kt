@@ -3,9 +3,7 @@ package com.github.michalchojnacki.findbook.data.di
 import android.content.Context
 import com.github.michalchojnacki.findbook.BuildConfig
 import com.github.michalchojnacki.findbook.R
-import com.github.michalchojnacki.findbook.data.SearchForBooksService
-import com.github.michalchojnacki.findbook.data.SearchForForBooksRemoteDataSource
-import com.github.michalchojnacki.findbook.data.SigningInterceptor
+import com.github.michalchojnacki.findbook.data.*
 import com.github.michalchojnacki.findbook.domain.SearchForBooksDataSource
 import dagger.Binds
 import dagger.Module
@@ -38,6 +36,14 @@ class RepositoryModule {
     @Module
     interface BindsModule {
         @Binds
-        fun provideSearchForForBooksRemoteDataSource(searchForForBooksRemoteDataSource: SearchForForBooksRemoteDataSource): SearchForBooksDataSource
+        @Remote
+        fun provideSearchForForBooksRemoteDataSource(searchForBooksRepository: SearchForForBooksRemoteDataSource): SearchForBooksDataSource
+
+        @Binds
+        @Local
+        fun provideSearchForForBooksLocalDataSource(searchForForBooksLocalDataSource: SearchForForBooksLocalDataSource): SearchForBooksDataSource
+
+        @Binds
+        fun provideSearchForBooksRepository(searchForBooksRepository: SearchForBooksRepository): SearchForBooksDataSource
     }
 }
