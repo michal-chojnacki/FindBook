@@ -1,4 +1,4 @@
-package com.github.michalchojnacki.findbook.ui.main
+package com.github.michalchojnacki.findbook.ui.navigation
 
 import android.os.Bundle
 import android.view.MenuItem

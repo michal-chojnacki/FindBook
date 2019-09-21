@@ -11,7 +11,7 @@ import com.github.michalchojnacki.findbook.ui.common.EventObserver
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.activityViewModel
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
 import com.github.michalchojnacki.findbook.ui.di.injector
-import com.github.michalchojnacki.findbook.ui.main.MainNavigationViewModel
+import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
 import com.github.michalchojnacki.findbook.util.exhaustive
 
 class TypingSearchFragment : BaseFragment() {

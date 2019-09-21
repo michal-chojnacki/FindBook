@@ -14,15 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import com.github.michalchojnacki.findbook.R
+import com.github.michalchojnacki.findbook.ui.common.BaseFragment
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.activityViewModel
 import com.github.michalchojnacki.findbook.ui.di.injector
-import com.github.michalchojnacki.findbook.ui.main.MainNavigationViewModel
+import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.vision.text.TextRecognizer
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.ocr_capture_fragment.*
 import java.io.IOException
 
@@ -32,7 +31,7 @@ private const val PREVIEW_OPTIMAL_WIDTH = 1280
 private const val PREVIEW_OPTIMAL_HEIGHT = 1024
 private const val PREVIEW_OPTIMAL_FPS = 2.0f
 
-class OcrCaptureFragment : Fragment() {
+class OcrCaptureFragment : BaseFragment() {
     private var cameraSource: CameraSource? = null
     private lateinit var scaleGestureDetector: ScaleGestureDetector
     @Suppress("UNCHECKED_CAST")
@@ -79,20 +78,15 @@ class OcrCaptureFragment : Fragment() {
                 Manifest.permission.CAMERA
             )
         ) {
-            ActivityCompat.requestPermissions(activity, permissions, RC_HANDLE_CAMERA_PERM)
+            requestPermissions(permissions, RC_HANDLE_CAMERA_PERM)
             return
         }
 
-        val listener = View.OnClickListener {
-            ActivityCompat.requestPermissions(activity, permissions, RC_HANDLE_CAMERA_PERM)
-        }
-
-        Snackbar.make(
-            graphicOverlay, R.string.permission_camera_rationale,
-            Snackbar.LENGTH_INDEFINITE
-        )
-            .setAction(R.string.ok, listener)
-            .show()
+        AlertDialog.Builder(context).setTitle(R.string.no_camera_permission_title)
+            .setMessage(R.string.permission_camera_rationale)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                requestPermissions(permissions, RC_HANDLE_CAMERA_PERM)
+            }.show()
     }
 
     /**
@@ -191,8 +185,7 @@ class OcrCaptureFragment : Fragment() {
             .setMessage(R.string.no_camera_permission_msg)
             .setPositiveButton(R.string.ok) { _, _ ->
                 navigationViewModel.showTypingSearch(becauseOfNoCameraPermission = true)
-            }
-            .show()
+            }.show()
     }
 
     /**
