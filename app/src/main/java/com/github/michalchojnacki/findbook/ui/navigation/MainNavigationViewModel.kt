@@ -16,10 +16,6 @@ class MainNavigationViewModel @Inject constructor() : BaseViewModel() {
         _uiResultLiveData.postValue(Event(UiResult.ShowOcrScanner))
     }
 
-    fun onTextCaptured(query: String) {
-        showBookList(query)
-    }
-
     fun showBookList(query: String) {
         _uiResultLiveData.postValue(Event(UiResult.ShowBookList(query)))
     }

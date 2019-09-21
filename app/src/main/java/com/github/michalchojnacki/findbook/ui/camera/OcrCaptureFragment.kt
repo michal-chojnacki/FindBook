@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.activityViewModel
+import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
 import com.github.michalchojnacki.findbook.ui.di.injector
 import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
 import com.google.android.gms.common.ConnectionResult
@@ -38,6 +39,7 @@ class OcrCaptureFragment : BaseFragment() {
     private val graphicOverlay: GraphicOverlay<OcrGraphic>
         get() = scannerOverlay as GraphicOverlay<OcrGraphic>
 
+    private val viewModel: OcrCaptureViewModel by viewModel { injector.ocrCaptureViewModel }
     private val navigationViewModel: MainNavigationViewModel by activityViewModel { injector.mainNavigationViewModel }
 
     companion object {
@@ -104,7 +106,8 @@ class OcrCaptureFragment : BaseFragment() {
 
         val textRecognizer = TextRecognizer.Builder(context).build()
         textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay, OcrOnTextDetectedListener {
-            navigationViewModel.onTextCaptured(it)
+            it.takeIf { viewModel.validateText(it) }
+                ?.let { query -> navigationViewModel.showBookList(query) }
         }))
 
         if (!textRecognizer.isOperational) {
