@@ -68,10 +68,7 @@ class OcrCaptureFragment : BaseFragment() {
         view.setOnTouchListener { _, event -> scaleGestureDetector.onTouchEvent(event) }
         scannerGoToSearchTextBtn.setOnClickListener { navigationViewModel.showTypingSearch() }
         viewModel.onValidatedTextLiveData.observe(this, EventObserver { query ->
-            run {
-                navigationViewModel.showBookList(query)
-                viewModel.onValidatedTextLiveData.removeObservers(this)
-            }
+            navigationViewModel.showBookList(query)
         })
     }
 

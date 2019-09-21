@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.michalchojnacki.findbook.domain.CapturedTextValidUseCase
 import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
 import com.github.michalchojnacki.findbook.ui.common.Event
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +20,10 @@ class OcrCaptureViewModel @Inject constructor(private val capturedTextValid: Cap
     fun onTextDetected(query: String) {
         viewModelScope.launch {
             if (capturedTextValid(query)) {
+                viewModelScope.coroutineContext.cancelChildren()
                 _onValidatedTextLiveData.postValue(Event(query))
             }
         }
     }
+
 }
