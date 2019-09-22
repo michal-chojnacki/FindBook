@@ -10,5 +10,5 @@ interface RepositoryModule {
 
     @Binds
     @Reusable
-    fun provideSearchForBooksService(fakeSearchForBooksService: FakeSearchForBooksService): SearchForBooksService
+    fun provideSearchForBooksService(mockSearchForBooksService: MockSearchForBooksService): SearchForBooksService
 }
