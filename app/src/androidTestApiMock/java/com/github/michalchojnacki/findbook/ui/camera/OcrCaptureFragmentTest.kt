@@ -52,20 +52,19 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.SHORT)
-        coVerify(exactly = 1) {
-            mockSearchForBooksService.searchForBooksWithQuery(any())
-            mockSearchForBooksService.searchForBooksWithQuery(fakeText)
-        }
+        wait(WaitPeriod.REGULAR)
         Assert.assertEquals(
             MainNavigationViewModel.UiResult.ShowBookList(fakeText),
             mainNavigationViewModel.uiResultLiveData.value!!.consume()
         )
+        coVerify(exactly = 1) {
+            mockSearchForBooksService.searchForBooksWithQuery(any())
+            mockSearchForBooksService.searchForBooksWithQuery(fakeText)
+        }
     }
-
 
     @Test
     fun testScanning_WhenTextDoesNotHaveBooks() {
@@ -81,15 +80,15 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
+        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeText)
         }
-        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
     }
 
     @Test
@@ -103,14 +102,14 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
+        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 0) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
         }
-        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
     }
 
     @Test
@@ -127,15 +126,15 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
+        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeText)
         }
-        Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
     }
 
     @Test
@@ -147,7 +146,7 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.SHORT)
+        wait(WaitPeriod.REGULAR)
 
         Espresso.onView(ViewMatchers.withId(R.id.scannerGoToSearchTextBtn))
             .perform(ViewActions.click())
