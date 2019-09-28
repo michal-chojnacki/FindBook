@@ -13,7 +13,9 @@ import com.github.michalchojnacki.findbook.ui.helpers.wait
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Test
@@ -90,10 +92,11 @@ class BookListFragmentTest {
     @Test
     fun testLoadingBookList_isProgressBarShownCase() {
         val fakeQuery = "test query 3"
-        val fakeChannel = Channel<Unit>()
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.coAnswers {
-            fakeChannel.receive()
-            Response.success(mockSearchForBooksService.emptyResponseBody)
+            withContext(Dispatchers.IO) {
+                delay(2_000)
+                Response.success(mockSearchForBooksService.emptyResponseBody)
+            }
         }
 
         launchFragmentInContainer<BookListFragment>(
@@ -104,7 +107,6 @@ class BookListFragmentTest {
         onView(withId(R.id.books_error_tv)).check(matches(not(isDisplayed())))
         onView(withId(R.id.books_progress_bar)).check(matches(isDisplayed()))
         onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
-        fakeChannel.offer(Unit)
     }
 
     @Test

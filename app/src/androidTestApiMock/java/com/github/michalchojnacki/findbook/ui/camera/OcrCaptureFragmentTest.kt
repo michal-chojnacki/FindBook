@@ -48,8 +48,9 @@ class OcrCaptureFragmentTest {
         launchFragmentInContainer<OcrCaptureFragment>(
             themeResId = R.style.AppTheme
         ).onFragment {
-            viewModel = it.viewModels<OcrCaptureViewModel>().value
+            wait(WaitPeriod.SHORT)
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
+            viewModel = it.viewModels<OcrCaptureViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
         wait(WaitPeriod.SHORT)
@@ -77,6 +78,7 @@ class OcrCaptureFragmentTest {
         launchFragmentInContainer<OcrCaptureFragment>(
             themeResId = R.style.AppTheme
         ).onFragment {
+            wait(WaitPeriod.SHORT)
             viewModel = it.viewModels<OcrCaptureViewModel>().value
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
@@ -99,6 +101,7 @@ class OcrCaptureFragmentTest {
         launchFragmentInContainer<OcrCaptureFragment>(
             themeResId = R.style.AppTheme
         ).onFragment {
+            wait(WaitPeriod.SHORT)
             viewModel = it.viewModels<OcrCaptureViewModel>().value
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
@@ -123,6 +126,7 @@ class OcrCaptureFragmentTest {
         launchFragmentInContainer<OcrCaptureFragment>(
             themeResId = R.style.AppTheme
         ).onFragment {
+            wait(WaitPeriod.SHORT)
             viewModel = it.viewModels<OcrCaptureViewModel>().value
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
@@ -143,6 +147,7 @@ class OcrCaptureFragmentTest {
         launchFragmentInContainer<OcrCaptureFragment>(
             themeResId = R.style.AppTheme
         ).onFragment {
+            wait(WaitPeriod.SHORT)
             viewModel = it.viewModels<OcrCaptureViewModel>().value
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
