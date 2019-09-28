@@ -2,6 +2,7 @@ package com.github.michalchojnacki.findbook.ui.navigation
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -36,7 +37,8 @@ class MainNavigationActivityTest {
         wait(WaitPeriod.SHORT)
 
         Espresso.onView(withId(R.id.typingSearchWithTextEt)).check(matches(isDisplayed()))
-            .perform(ViewActions.typeText("fake query"))
+            .perform(ViewActions.typeText("fake query")).perform(closeSoftKeyboard())
+        wait(WaitPeriod.SHORT)
         Espresso.onView(withId(R.id.typingSearchWithTextBtn)).check(matches(isDisplayed()))
             .perform(ViewActions.click())
         wait(WaitPeriod.SHORT)

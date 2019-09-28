@@ -12,7 +12,7 @@ jobs:
         name: Preconfiguring dependencies
         command: |
           sudo apt-get update
-          sudo apt-get -y install libqt5widgets5
+          sudo apt-get -y install libpulse0
     - checkout
     - run:
         name: Add secrets.properties file
@@ -41,20 +41,23 @@ jobs:
     - run:
         name: Setup Setup emulator
         command: |
-          sdkmanager "system-images;android-21;google_apis;armeabi-v7a"
-          echo "no" | avdmanager create avd -n test -k "system-images;android-21;google_apis;armeabi-v7a"
+          sdkmanager "system-images;android-22;google_apis;armeabi-v7a"
+          echo "no" | avdmanager create avd -n test -k "system-images;android-22;google_apis;armeabi-v7a"
     - run:
         name: Launch emulator
-        command: emulator64-arm -avd test -no-audio -no-window -accel auto
+        command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -no-audio -no-window -no-boot-anim -gpu off -netspeed full -netdelay none
         background: true
     - run:
         name: Wait emulator
-        command: |
-          circle-android wait-for-boot
-          adb shell input keyevent 82
+        command: circle-android wait-for-boot
+    - run:
+        name: Install the app
+        command: ./gradlew --no-daemon --max-workers=2 :app:installApiMockDebug
     - run:
         name: Run Instrumental Tests
-        command: ./gradlew --no-daemon --max-workers=2 :app:connectedApiMockDebugAndroidTest
+        command: |
+          adb shell input keyevent 82
+          ./gradlew --no-daemon --max-workers=2 :app:connectedApiMockDebugAndroidTest
     - store_artifacts:
         path: app/build/reports
         destination: reports
