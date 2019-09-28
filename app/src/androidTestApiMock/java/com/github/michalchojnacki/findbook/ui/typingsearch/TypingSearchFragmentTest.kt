@@ -6,6 +6,8 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.github.michalchojnacki.findbook.R
+import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
+import com.github.michalchojnacki.findbook.ui.helpers.wait
 import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
 import org.junit.Assert
 import org.junit.Test
@@ -25,7 +27,8 @@ class TypingSearchFragmentTest {
         }
 
         Espresso.onView(withId(R.id.typingSearchWithTextEt))
-            .perform(ViewActions.typeText(fakeQuery))
+            .perform(ViewActions.typeText(fakeQuery)).perform(ViewActions.closeSoftKeyboard())
+        wait(WaitPeriod.SHORT)
         Espresso.onView(withId(R.id.typingSearchWithTextBtn)).perform(ViewActions.click())
         Assert.assertEquals(
             MainNavigationViewModel.UiResult.ShowBookList(fakeQuery),
