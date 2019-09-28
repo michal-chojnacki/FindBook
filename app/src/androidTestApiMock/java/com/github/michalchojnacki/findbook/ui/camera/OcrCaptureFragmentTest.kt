@@ -11,12 +11,12 @@ import androidx.test.runner.permission.PermissionRequester
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
 import com.github.michalchojnacki.findbook.ui.di.InjectorProvider
+import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
+import com.github.michalchojnacki.findbook.ui.helpers.wait
 import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -52,9 +52,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeText)
@@ -80,9 +81,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeText)
@@ -101,9 +103,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 0) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
         }
@@ -124,9 +127,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeText)
@@ -143,11 +147,12 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        runBlocking { delay(500) }
-
+        wait(WaitPeriod.SHORT)
 
         Espresso.onView(ViewMatchers.withId(R.id.scannerGoToSearchTextBtn))
             .perform(ViewActions.click())
+
+        wait(WaitPeriod.SHORT)
         Assert.assertEquals(
             MainNavigationViewModel.UiResult.ShowTypingSearch(false),
             mainNavigationViewModel.uiResultLiveData.value!!.consume()

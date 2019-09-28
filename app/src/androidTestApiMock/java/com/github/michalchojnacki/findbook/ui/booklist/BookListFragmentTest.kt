@@ -6,14 +6,14 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.github.michalchojnacki.findbook.R
-import com.github.michalchojnacki.findbook.data.BooksSearchRawModel
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
 import com.github.michalchojnacki.findbook.ui.di.InjectorProvider
+import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
+import com.github.michalchojnacki.findbook.ui.helpers.wait
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.channels.Channel
 import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Test
@@ -43,8 +43,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
-
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)
@@ -69,7 +68,7 @@ class BookListFragmentTest {
     @Test
     fun testLoadingBookList_errorCase() {
         val fakeQuery = "test query with error"
-        coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.answers {
+        coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.coAnswers {
             throw RuntimeException("Fake exception!")
         }
 
@@ -78,23 +77,23 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
+        onView(withId(R.id.books_error_tv)).check(matches(isDisplayed())).check(matches(withText(R.string.book_list_error)))
+        onView(withId(R.id.books_progress_bar)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)
         }
-        onView(withId(R.id.books_error_tv)).check(matches(isDisplayed())).check(matches(withText(R.string.book_list_error)))
-        onView(withId(R.id.books_progress_bar)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
     }
-
 
     @Test
     fun testLoadingBookList_isProgressBarShownCase() {
         val fakeQuery = "test query 3"
-        coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.answers {
-            runBlocking { delay(500) }
-            Response.success(BooksSearchRawModel())
+        val fakeChannel = Channel<Unit>()
+        coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.coAnswers {
+            fakeChannel.receive()
+            Response.success(mockSearchForBooksService.emptyResponseBody)
         }
 
         launchFragmentInContainer<BookListFragment>(
@@ -105,6 +104,7 @@ class BookListFragmentTest {
         onView(withId(R.id.books_error_tv)).check(matches(not(isDisplayed())))
         onView(withId(R.id.books_progress_bar)).check(matches(isDisplayed()))
         onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
+        fakeChannel.offer(Unit)
     }
 
     @Test
@@ -118,8 +118,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
-
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)
