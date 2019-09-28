@@ -9,11 +9,11 @@ import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.data.BooksSearchRawModel
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
 import com.github.michalchojnacki.findbook.ui.di.InjectorProvider
+import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
+import com.github.michalchojnacki.findbook.ui.helpers.wait
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Test
@@ -43,8 +43,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
-
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)
@@ -78,7 +77,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)
@@ -93,7 +92,7 @@ class BookListFragmentTest {
     fun testLoadingBookList_isProgressBarShownCase() {
         val fakeQuery = "test query 3"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.answers {
-            runBlocking { delay(500) }
+            wait(WaitPeriod.LONG)
             Response.success(BooksSearchRawModel())
         }
 
@@ -118,8 +117,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
-        runBlocking { delay(500) }
-
+        wait(WaitPeriod.SHORT)
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
             mockSearchForBooksService.searchForBooksWithQuery(fakeQuery)

@@ -8,8 +8,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.permission.PermissionRequester
 import com.github.michalchojnacki.findbook.R
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
+import com.github.michalchojnacki.findbook.ui.helpers.wait
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,15 +29,17 @@ class MainNavigationActivityTest {
 
     @Test
     fun integrationTest() {
+        wait(WaitPeriod.SHORT)
+
         Espresso.onView(withId(R.id.scannerGoToSearchTextBtn)).check(matches(isDisplayed()))
             .perform(ViewActions.click())
-        runBlocking { delay(1_000) }
+        wait(WaitPeriod.SHORT)
 
         Espresso.onView(withId(R.id.typingSearchWithTextEt)).check(matches(isDisplayed()))
             .perform(ViewActions.typeText("fake query"))
         Espresso.onView(withId(R.id.typingSearchWithTextBtn)).check(matches(isDisplayed()))
             .perform(ViewActions.click())
-        runBlocking { delay(1_000) }
+        wait(WaitPeriod.SHORT)
 
         Espresso.onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
     }
