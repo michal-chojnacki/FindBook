@@ -62,6 +62,7 @@
                 tools:visibility="gone" />
 
         <ProgressBar
+                android:id="@+id/books_progress_bar"
                 android:layout_width="@dimen/progress_bar_size"
                 android:layout_height="@dimen/progress_bar_size"
                 android:visibility="@{viewModel.uiState.progressBarVisible}"

@@ -1,6 +1,8 @@
 package com.github.michalchojnacki.findbook.ui.di
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
+import com.github.michalchojnacki.findbook.data.SearchForBooksService
 import com.github.michalchojnacki.findbook.data.di.RepositoryModule
 import com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel
 import com.github.michalchojnacki.findbook.ui.camera.OcrCaptureViewModel
@@ -28,6 +30,9 @@ interface ApplicationComponent {
     val typingSearchViewModel: TypingSearchViewModel
 
     val ocrCaptureViewModel: OcrCaptureViewModel
+
+    @VisibleForTesting
+    val searchForBooksService: SearchForBooksService
 }
 
 @AssistedModule

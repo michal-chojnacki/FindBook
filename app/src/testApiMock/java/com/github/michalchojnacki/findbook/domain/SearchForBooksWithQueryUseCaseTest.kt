@@ -1,6 +1,5 @@
 package com.github.michalchojnacki.findbook.domain
 
-import com.github.michalchojnacki.findbook.di.DaggerTestAppComponent
 import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
@@ -8,22 +7,14 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import java.io.IOException
-import javax.inject.Inject
 
 private const val FAKE_QUERY = "fake_query"
 
 class SearchForBooksWithQueryUseCaseTest {
     private val searchForBooksDataSource: SearchForBooksDataSource = mockk()
-    @Inject
-    lateinit var searchForBooksWithQuery: SearchForBooksWithQueryUseCase
-
-    @Before
-    fun setUp() {
-        DaggerTestAppComponent.factory().create(searchForBooksDataSource).inject(this)
-    }
+    private val searchForBooksWithQuery = SearchForBooksWithQueryUseCase(searchForBooksDataSource)
 
     @Test
     fun `verify invoking searching on data source`() = runBlocking {
