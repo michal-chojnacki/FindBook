@@ -18,7 +18,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.hamcrest.core.IsNot.not
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import retrofit2.Response
 
@@ -91,12 +90,11 @@ class BookListFragmentTest {
     }
 
     @Test
-    @Ignore
     fun testLoadingBookList_isProgressBarShownCase() {
         val fakeQuery = "test query 3"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.coAnswers {
             withContext(Dispatchers.IO) {
-                delay(WaitPeriod.REGULAR.timeInMillis)
+                delay(WaitPeriod.LONG.timeInMillis)
                 Response.success(mockSearchForBooksService.emptyResponseBody)
             }
         }
@@ -106,6 +104,7 @@ class BookListFragmentTest {
             themeResId = R.style.AppTheme
         )
 
+        wait(WaitPeriod.SHORT)
         onView(withId(R.id.books_error_tv)).check(matches(not(isDisplayed())))
         onView(withId(R.id.books_progress_bar)).check(matches(isDisplayed()))
         onView(withId(R.id.books_rv)).check(matches(isDisplayed()))

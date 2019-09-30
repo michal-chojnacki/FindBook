@@ -3,13 +3,12 @@ package com.github.michalchojnacki.findbook.ui.util
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 
 @BindingAdapter("textColorRes")
 fun TextView.bindTextColorRes(@ColorRes colorRes: Int) {
-    setTextColor(ContextCompat.getColor(context, colorRes))
+    setTextColor(context.getColor(colorRes))
 }
 
 @BindingConversion

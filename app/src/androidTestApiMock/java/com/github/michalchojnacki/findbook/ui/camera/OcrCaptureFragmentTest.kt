@@ -52,10 +52,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         Assert.assertEquals(
             MainNavigationViewModel.UiResult.ShowBookList(fakeText),
             mainNavigationViewModel.uiResultLiveData.value!!.consume()
@@ -80,10 +80,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
@@ -102,10 +102,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 0) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
@@ -126,10 +126,10 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         viewModel.onTextDetected(fakeText)
 
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
         Assert.assertEquals(null, mainNavigationViewModel.uiResultLiveData.value!!.consume())
         coVerify(exactly = 1) {
             mockSearchForBooksService.searchForBooksWithQuery(any())
@@ -146,7 +146,7 @@ class OcrCaptureFragmentTest {
             mainNavigationViewModel = it.activityViewModels<MainNavigationViewModel>().value
             mainNavigationViewModel.uiResultLiveData.value?.consume()
         }
-        wait(WaitPeriod.REGULAR)
+        wait(WaitPeriod.SHORT)
 
         Espresso.onView(ViewMatchers.withId(R.id.scannerGoToSearchTextBtn))
             .perform(ViewActions.click())
