@@ -19,4 +19,7 @@
     <string name="book_list_item_rating_icon_description">Star icon</string>
     <string name="book_list_error">Ooops! Something went wrong!</string>
     <string name="book_list_empty_error">Ooops! There is no book with this title!</string>
+
+    <string name="book_details_show_reviews">Show reviews</string>
+    <string name="book_details_reviews_title">Reviews of: \"%s\"</string>
 </resources>

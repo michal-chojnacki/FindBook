@@ -9,5 +9,6 @@ data class BookDetails(
     val textReviewsCount: Int,
     val originalPublicationYear: Int?,
     val averageRating: Double,
+    val description: String,
     val reviewsWidget : String
 )

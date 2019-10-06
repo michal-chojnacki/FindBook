@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{!viewModel.uiState.error}">
+
+        <ImageView
+                android:id="@+id/bookDetailsCover"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:remoteSrc="@{viewModel.uiState.bookDetails.imageUrl}"
+                app:requestManager="@{viewModel.requestManager}"
+                tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+                android:id="@+id/bookDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.uiState.bookDetails.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Some title" />
+
+        <Button
+                android:id="@+id/bookDetailsShowComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/book_details_show_reviews"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:onClick="@{_ -> viewModel.showReviews(viewModel.uiState.bookDetails)}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

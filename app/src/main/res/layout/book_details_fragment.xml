@@ -15,34 +15,12 @@
             android:layout_height="match_parent"
             android:paddingTop="@dimen/toolbar_height">
 
-        <ImageView
-                android:id="@+id/bookDetailsCover"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:remoteSrc="@{viewModel.uiState.bookDetails.imageUrl}"
-                app:requestManager="@{viewModel.requestManager}"
-                tools:src="@mipmap/ic_launcher" />
-
-        <TextView
-                android:id="@+id/bookDetailsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.uiState.bookDetails.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Some title" />
-
-        <WebView
-                android:id="@+id/bookDetailsReviews"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="true"
-                app:html="@{viewModel.uiState.bookDetails.reviewsWidget}"
+        <include layout="@layout/book_details_content"
+                app:viewModel="@{viewModel}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
                 android:id="@+id/bookDetailsError"
@@ -81,6 +59,9 @@
                 android:layout_width="@dimen/progress_bar_size"
                 android:layout_height="@dimen/progress_bar_size"
                 android:visibility="@{viewModel.uiState.progressBarVisible}"
+                android:background="@color/md_white_1000"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

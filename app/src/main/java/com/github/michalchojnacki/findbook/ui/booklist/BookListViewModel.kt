@@ -28,13 +28,13 @@ class BookListViewModel @AssistedInject constructor(
     }
 
     val uiState = NonNullMutableLiveData(UiState())
-    val uiResultLiveData: LiveData<Event<UiResult>>
-        get() = _uiResultLiveData
     val onBookSelectedListener = object : OnBookSelectedListener {
         override fun onBookSelected(book: Book) {
             _uiResultLiveData.postValue(Event(UiResult.ShowBookDetails(book)))
         }
     }
+    val uiResultLiveData: LiveData<Event<UiResult>>
+        get() = _uiResultLiveData
 
     private val _uiResultLiveData = MutableLiveData<Event<UiResult>>()
 
