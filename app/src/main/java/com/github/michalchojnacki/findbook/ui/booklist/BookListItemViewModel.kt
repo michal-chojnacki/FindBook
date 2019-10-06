@@ -5,7 +5,9 @@ import com.bumptech.glide.RequestManager
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.domain.model.Book
 
-class BookListItemViewModel(val requestManager: RequestManager, book: Book) {
+class BookListItemViewModel(val requestManager: RequestManager,
+                            book: Book,
+                            private val onItemClicked : () -> Unit) {
     val imageUrl = book.imageUrl
     val author = book.author
     val title = book.title
@@ -24,5 +26,9 @@ class BookListItemViewModel(val requestManager: RequestManager, book: Book) {
         book.averageRating >= 1.5 -> R.color.book_list_item_rating_15_20
         book.averageRating >= 1.0 -> R.color.book_list_item_rating_10_20
         else -> R.color.book_list_item_rating_00_10
+    }
+
+    fun onClicked() {
+        onItemClicked()
     }
 }

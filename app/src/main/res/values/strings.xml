@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">FindBook</string>
     <string name="common_ok">OK</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_loading_error">Ooops! Something went wrong!</string>
 
-    <string name="scanner_common_retry">Retry</string>
     <string name="scanner_permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="scanner_no_camera_permission_title">Warning!</string>
     <string name="scanner_no_camera_permission_msg">OCR scanner cannot run because it does not have the camera permission.</string>

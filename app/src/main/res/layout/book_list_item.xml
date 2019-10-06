@@ -19,6 +19,7 @@
             android:elevation="@dimen/margin_sm"
             android:focusable="true"
             android:foreground="?selectableItemBackground"
+            android:onClick="@{_ -> viewModel.onClicked()}"
             android:padding="@dimen/margin_sm">
 
         <ImageView

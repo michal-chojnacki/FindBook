@@ -8,12 +8,16 @@ import com.bumptech.glide.Glide
 import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.BookListFragmentBinding
 import com.github.michalchojnacki.findbook.ui.common.BaseFragment
+import com.github.michalchojnacki.findbook.ui.common.EventObserver
+import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.activityViewModel
 import com.github.michalchojnacki.findbook.ui.di.ViewModelFactoryExtensions.viewModel
 import com.github.michalchojnacki.findbook.ui.di.injector
+import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
+import com.github.michalchojnacki.findbook.util.exhaustive
 
 class BookListFragment : BaseFragment() {
     companion object {
-        private const val ARG_QUERY = "com.github.michalchojnacki.findbook.ui.booklistBookListFragment.ARG_QUERY"
+        private const val ARG_QUERY = "com.github.michalchojnacki.findbook.ui.booklist.BookListFragment.ARG_QUERY"
 
         fun newInstance(query: String) =
             BookListFragment().apply { arguments = Bundle().apply { putString(ARG_QUERY, query) } }
@@ -25,6 +29,7 @@ class BookListFragment : BaseFragment() {
             query = queryArg
         )
     }
+    private val navigationViewModel: MainNavigationViewModel by activityViewModel { injector.mainNavigationViewModel }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +43,14 @@ class BookListFragment : BaseFragment() {
         BookListFragmentBinding.bind(view).apply {
             lifecycleOwner = this@BookListFragment
         }.viewModel = viewModel
+
+        viewModel.uiResultLiveData.observe(this, EventObserver {
+            when(it) {
+                is BookListViewModel.UiResult.ShowBookDetails -> {
+                    navigationViewModel.showBookDetails(it.book)
+                }
+            }.exhaustive
+        })
     }
 
     override val toolbarTitle: String?

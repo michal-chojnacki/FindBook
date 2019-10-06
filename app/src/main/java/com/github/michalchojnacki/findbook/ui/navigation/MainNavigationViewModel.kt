@@ -2,6 +2,7 @@ package com.github.michalchojnacki.findbook.ui.navigation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.michalchojnacki.findbook.domain.model.Book
 import com.github.michalchojnacki.findbook.ui.common.BaseViewModel
 import com.github.michalchojnacki.findbook.ui.common.Event
 import javax.inject.Inject
@@ -24,9 +25,14 @@ class MainNavigationViewModel @Inject constructor() : BaseViewModel() {
         _uiResultLiveData.postValue(Event(UiResult.ShowTypingSearch(becauseOfNoCameraPermission = becauseOfNoCameraPermission)))
     }
 
+    fun showBookDetails(book: Book) {
+        _uiResultLiveData.postValue(Event(UiResult.ShowBookDetails(book)))
+    }
+
     sealed class UiResult {
         object ShowOcrScanner : UiResult()
         data class ShowBookList(val query: String) : UiResult()
         data class ShowTypingSearch(val becauseOfNoCameraPermission: Boolean) : UiResult()
+        data class ShowBookDetails(val book: Book) : UiResult()
     }
 }

@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel" />
+                type="com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,24 +15,37 @@
             android:layout_height="match_parent"
             android:paddingTop="@dimen/toolbar_height">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/books_rv"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingTop="@dimen/margin_sm"
-                app:bookListAdapter="@{viewModel.uiState.books}"
-                app:requestManager="@{viewModel.requestManager}"
-                app:onBookSelectedListener="@{viewModel.onBookSelectedListener}"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+                android:id="@+id/bookDetailsCover"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="2"
-                tools:listitem="@layout/book_list_item" />
+                app:remoteSrc="@{viewModel.uiState.bookDetails.imageUrl}"
+                app:requestManager="@{viewModel.requestManager}"
+                tools:src="@mipmap/ic_launcher" />
 
         <TextView
-                android:id="@+id/books_error_tv"
+                android:id="@+id/bookDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.uiState.bookDetails.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Some title" />
+
+        <WebView
+                android:id="@+id/bookDetailsReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                app:html="@{viewModel.uiState.bookDetails.reviewsWidget}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+                android:id="@+id/bookDetailsError"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -40,7 +53,8 @@
                 android:layout_marginEnd="@dimen/margin_xlg"
                 android:layout_marginBottom="@dimen/margin_lg"
                 android:gravity="center"
-                app:textRes="@{viewModel.uiState.errorRes}"
+                android:text="@string/common_loading_error"
+                android:visibility="@{viewModel.uiState.error}"
                 app:layout_constraintBottom_toTopOf="@+id/books_retry_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,11 +68,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{_ -> viewModel.onRetryClick()}"
                 android:text="@string/common_retry"
-                android:visibility="@{viewModel.uiState.retryPossible}"
+                android:visibility="@{viewModel.uiState.error}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/books_error_tv"
+                app:layout_constraintTop_toBottomOf="@+id/bookDetailsError"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:visibility="gone" />
 
