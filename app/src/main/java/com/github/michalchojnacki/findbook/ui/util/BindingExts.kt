@@ -9,6 +9,9 @@ import androidx.databinding.BindingConversion
 
 @BindingAdapter("textColorRes")
 fun TextView.bindTextColorRes(@ColorRes colorRes: Int) {
+    if(colorRes == 0) {
+        return
+    }
     setTextColor(context.getColor(colorRes))
 }
 

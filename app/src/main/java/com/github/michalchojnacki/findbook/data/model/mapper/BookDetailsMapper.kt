@@ -14,7 +14,7 @@ class BookDetailsMapper @Inject constructor() {
             imageUrl = booksSearchRawModel.book?.imageUrl ?: "",
             ratingsCount = booksSearchRawModel.book?.work?.ratingsCount ?: 0,
             textReviewsCount = booksSearchRawModel.book?.work?.textReviewsCount ?: 0,
-            originalPublicationYear = booksSearchRawModel.book?.work?.originalPublicationYear ?: 0,
+            originalPublicationYear = booksSearchRawModel.book?.work?.originalPublicationYear,
             averageRating = booksSearchRawModel.book?.averageRating ?: 0.0,
             reviewsWidget = booksSearchRawModel.book?.reviewsWidget ?: "",
             description = booksSearchRawModel.book?.description ?: "")

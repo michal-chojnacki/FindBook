@@ -10,37 +10,140 @@
                 type="com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{!viewModel.uiState.error}">
+            android:layout_height="match_parent">
 
-        <ImageView
-                android:id="@+id/bookDetailsCover"
-                android:layout_width="120dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:remoteSrc="@{viewModel.uiState.bookDetails.imageUrl}"
-                app:requestManager="@{viewModel.requestManager}"
-                tools:src="@mipmap/ic_launcher" />
+                android:paddingTop="@dimen/margin_lg"
+                android:paddingBottom="@dimen/margin_lg"
+                android:visibility="@{viewModel.uiState.showContent}">
 
-        <TextView
-                android:id="@+id/bookDetailsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.uiState.bookDetails.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Some title" />
+            <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/bookDetailsGuideline"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4" />
 
-        <Button
-                android:id="@+id/bookDetailsShowComments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_details_show_reviews"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:onClick="@{_ -> viewModel.showReviews(viewModel.uiState.bookDetails)}"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                    android:id="@+id/bookDetailsCover"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_marginEnd="@dimen/margin_sm"
+                    app:layout_constraintEnd_toEndOf="@+id/bookDetailsGuideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:remoteSrc="@{viewModel.uiState.imageUrl}"
+                    app:requestManager="@{viewModel.requestManager}"
+                    tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                    android:id="@+id/bookDetailsAuthors"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.uiState.bookAuthors}"
+                    app:layout_constraintBottom_toTopOf="@+id/bookDetailsTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookDetailsGuideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Authors" />
+
+            <TextView
+                    android:id="@+id/bookDetailsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:text="@{viewModel.uiState.bookTitle}"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/bookDetailsTitleYear"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookDetailsGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDetailsAuthors"
+                    tools:text="Some title" />
+
+            <TextView
+                    android:id="@+id/bookDetailsTitleYear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:text="@{viewModel.uiState.publicationYear}"
+                    android:visibility="@{viewModel.uiState.hasPublicationYear}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookDetailsGuideline"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDetailsTitle"
+                    tools:text="2019" />
+
+            <TextView
+                    android:id="@+id/bookDetailsRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:text="@{viewModel.uiState.averageRating}"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/bookDetailsRatingIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/bookDetailsRatingIcon"
+                    app:textColorRes="@{viewModel.uiState.averageRatingTextColor}"
+                    tools:text="4,19"
+                    tools:textColor="@color/book_list_item_rating_40_45" />
+
+            <TextView
+                    android:id="@+id/bookDetailsRatingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:layout_marginEnd="@dimen/margin_xs"
+                    android:text="@{viewModel.uiState.ratingsCount}"
+                    app:layout_constraintEnd_toStartOf="@+id/bookDetailsRatingBarrier"
+                    app:layout_constraintStart_toStartOf="@+id/bookDetailsRating"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDetailsRatingIcon"
+                    tools:text="(2000)" />
+
+            <ImageView
+                    android:id="@+id/bookDetailsRatingIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:contentDescription="@string/book_list_item_rating_icon_description"
+                    android:src="@drawable/ic_star"
+                    android:tint="@color/book_list_item_rating_icon"
+                    app:layout_constraintStart_toEndOf="@+id/bookDetailsRating"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDetailsCover" />
+
+            <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/bookDetailsRatingBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="bookDetailsRatingCount,bookDetailsRatingIcon" />
+
+            <Button
+                    android:id="@+id/bookDetailsShowComments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_md"
+                    android:onClick="@{_ -> viewModel.showReviews(viewModel.uiState.bookDetails)}"
+                    android:text="@string/book_details_show_reviews"
+                    app:layout_constraintStart_toEndOf="@+id/bookDetailsRatingBarrier"
+                    app:layout_constraintTop_toTopOf="@+id/bookDetailsRating" />
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_sm"
+                    android:layout_marginTop="@dimen/margin_sm"
+                    android:layout_marginEnd="@dimen/margin_sm"
+                    android:layout_marginBottom="@dimen/margin_sm"
+                    android:text="@{viewModel.uiState.bookDescription}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bookDetailsShowComments"
+                    tools:text="Description" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
