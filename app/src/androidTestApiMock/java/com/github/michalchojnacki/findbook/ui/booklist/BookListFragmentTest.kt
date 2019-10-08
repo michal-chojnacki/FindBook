@@ -35,7 +35,7 @@ class BookListFragmentTest {
     @Test
     fun testLoadingBookList_happyCaseScenario() {
         val fakeQuery = "test query"
-        val fakeResponse = mockSearchForBooksService.successfulResponseBody
+        val fakeResponse = mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.returns(
             Response.success(fakeResponse)
         )
@@ -95,7 +95,7 @@ class BookListFragmentTest {
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.coAnswers {
             withContext(Dispatchers.IO) {
                 delay(WaitPeriod.LONG.timeInMillis)
-                Response.success(mockSearchForBooksService.emptyResponseBody)
+                Response.success(mockSearchForBooksService.searchForBooksWithQueryEmptyResponseBody)
             }
         }
 
@@ -113,7 +113,7 @@ class BookListFragmentTest {
     @Test
     fun testLoadingBookList_emptyResponse() {
         val fakeQuery = "test query with empty response"
-        val fakeResponse = mockSearchForBooksService.emptyResponseBody
+        val fakeResponse = mockSearchForBooksService.searchForBooksWithQueryEmptyResponseBody
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeQuery) }.returns(Response.success(fakeResponse))
 
         launchFragmentInContainer<BookListFragment>(

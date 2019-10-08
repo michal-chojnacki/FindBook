@@ -2,9 +2,7 @@ package com.github.michalchojnacki.findbook.domain
 
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
 import com.github.michalchojnacki.findbook.di.DaggerTestAppComponent
-import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
-import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -29,7 +27,7 @@ class CapturedTextValidUseCaseTest {
     fun `test when data is valid`() = runBlocking {
         val testQuery = "test query"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(testQuery) }.returns(
-            Response.success(mockSearchForBooksService.successfulResponseBody)
+            Response.success(mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody)
         )
 
         val result = capturedTextValidUseCase(testQuery)
@@ -41,7 +39,7 @@ class CapturedTextValidUseCaseTest {
     fun `test when data is not valid`() = runBlocking {
         val testQuery = "test query"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(testQuery) }.returns(
-            Response.success(mockSearchForBooksService.emptyResponseBody)
+            Response.success(mockSearchForBooksService.searchForBooksWithQueryEmptyResponseBody)
         )
 
         val result = capturedTextValidUseCase(testQuery)
