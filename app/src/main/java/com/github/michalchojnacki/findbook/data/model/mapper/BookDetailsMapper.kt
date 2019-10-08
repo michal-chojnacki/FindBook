@@ -1,5 +1,6 @@
 package com.github.michalchojnacki.findbook.data.model.mapper
 
+import android.text.Html
 import com.github.michalchojnacki.findbook.data.model.BookDetailsRawModel
 import com.github.michalchojnacki.findbook.domain.model.BookDetails
 import dagger.Reusable
@@ -17,6 +18,6 @@ class BookDetailsMapper @Inject constructor() {
             originalPublicationYear = booksSearchRawModel.book?.work?.originalPublicationYear,
             averageRating = booksSearchRawModel.book?.averageRating ?: 0.0,
             reviewsWidget = booksSearchRawModel.book?.reviewsWidget ?: "",
-            description = booksSearchRawModel.book?.description ?: "")
+            description = booksSearchRawModel.book?.description?.let { Html.fromHtml(it).toString() } ?: "")
     }
 }

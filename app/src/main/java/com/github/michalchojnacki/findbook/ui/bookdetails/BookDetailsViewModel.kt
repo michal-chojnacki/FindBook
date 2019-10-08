@@ -27,6 +27,12 @@ class BookDetailsViewModel @AssistedInject constructor(
         fun create(requestManager: RequestManager, bookId: Long): BookDetailsViewModel
     }
 
+    val onPictureLoaded : (Result<Unit>) -> Unit = {
+        uiState.value = uiState.value.copy(pictureLoaded = true)
+    }
+    val imageUrl : LiveData<String> get() = _imageUrl
+    private val _imageUrl = NonNullMutableLiveData("")
+
     val uiState = NonNullMutableLiveData(UiState())
     val uiResultLiveData: LiveData<Event<UiResult>>
         get() = _uiResultLiveData
@@ -43,18 +49,22 @@ class BookDetailsViewModel @AssistedInject constructor(
                 isError = false
             )
             when (val result = loadBookDetailsUseCase(bookId)) {
-                is Result.Success -> uiState.value =
-                    UiState(
-                        bookDetails = result.data,
-                        progressBarVisible = false,
-                        isError = false
-                    )
-                is Result.Error -> uiState.value =
-                    UiState(
-                        bookDetails = null,
-                        progressBarVisible = false,
-                        isError = true
-                    )
+                is Result.Success -> {
+                    uiState.value = UiState(
+                            bookDetails = result.data,
+                            progressBarVisible = false,
+                            isError = false
+                        )
+                    _imageUrl.postValue(result.data.imageUrl)
+                }
+                is Result.Error -> {
+                    uiState.value = UiState(
+                            bookDetails = null,
+                            progressBarVisible = false,
+                            isError = true
+                        )
+                    _imageUrl.postValue("")
+                }
             }.exhaustive
         }
     }
@@ -72,9 +82,9 @@ class BookDetailsViewModel @AssistedInject constructor(
     data class UiState(
         val bookDetails: BookDetails? = null,
         val progressBarVisible: Boolean = false,
-        val isError: Boolean = false
+        val isError: Boolean = false,
+        val pictureLoaded: Boolean = false
     ) {
-        val imageUrl: String? get() = bookDetails?.imageUrl
         val bookTitle: String? get() = bookDetails?.title
         val bookAuthors: String? get() = bookDetails?.authors?.joinToString { it }
         val publicationYear: String? get() = bookDetails?.originalPublicationYear?.toString()
