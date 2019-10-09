@@ -15,6 +15,7 @@
             android:paddingTop="@dimen/toolbar_height">
 
         <WebView
+                android:id="@+id/bookDetailsReviewsWebview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:html="@{reviewsWidget}"

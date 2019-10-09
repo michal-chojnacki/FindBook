@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.permission.PermissionRequester
 import com.github.michalchojnacki.findbook.R
+import com.github.michalchojnacki.findbook.ui.helpers.CustomMatchers
 import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
 import com.github.michalchojnacki.findbook.ui.helpers.wait
 import org.junit.Before
@@ -44,5 +45,12 @@ class MainNavigationActivityTest {
         wait(WaitPeriod.SHORT)
 
         Espresso.onView(withId(R.id.books_rv)).check(matches(isDisplayed()))
+        Espresso.onView(CustomMatchers.withIndex(withId(R.id.bookListItemTitle), 0)).perform(ViewActions.click())
+        wait(WaitPeriod.SHORT)
+
+        Espresso.onView(withId(R.id.bookDetailsShowComments)).check(matches(isDisplayed())).perform(ViewActions.click())
+        wait(WaitPeriod.SHORT)
+
+        Espresso.onView(withId(R.id.bookDetailsReviewsWebview)).check(matches(isDisplayed()))
     }
 }
