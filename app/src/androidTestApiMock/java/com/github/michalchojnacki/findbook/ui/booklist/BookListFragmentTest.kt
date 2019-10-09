@@ -59,12 +59,6 @@ class BookListFragmentTest {
         onView(withText(fakeResponse.search!!.results!![1].bestBook!!.title)).check(
             matches(isDisplayed())
         )
-        onView(withText(fakeResponse.search!!.results!![2].bestBook!!.title)).check(
-            matches(isDisplayed())
-        )
-        onView(withText(fakeResponse.search!!.results!![3].bestBook!!.title)).check(
-            matches(isDisplayed())
-        )
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.github.michalchojnacki.findbook.ui.navigation
 
+import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
@@ -9,17 +10,24 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.permission.PermissionRequester
 import com.github.michalchojnacki.findbook.R
+import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
+import com.github.michalchojnacki.findbook.ui.di.InjectorProvider
 import com.github.michalchojnacki.findbook.ui.helpers.CustomMatchers
 import com.github.michalchojnacki.findbook.ui.helpers.WaitPeriod
 import com.github.michalchojnacki.findbook.ui.helpers.wait
+import io.mockk.coEvery
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import retrofit2.Response
 
 class MainNavigationActivityTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule(MainNavigationActivity::class.java, false)
+    private val mockSearchForBooksService =
+        (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
+                as InjectorProvider).component.searchForBooksService as MockSearchForBooksService
 
     @Before
     fun setUp() {
@@ -32,6 +40,8 @@ class MainNavigationActivityTest {
     @Test
     fun integrationTest() {
         wait(WaitPeriod.SHORT)
+        coEvery { mockSearchForBooksService.searchForBooksWithQuery(any()) }.returns(Response.success(mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody))
+        coEvery { mockSearchForBooksService.getBookDetails(any()) }.returns(Response.success(mockSearchForBooksService.getBookDetailsSuccessfulResponseBody))
 
         Espresso.onView(withId(R.id.scannerGoToSearchTextBtn)).check(matches(isDisplayed()))
             .perform(ViewActions.click())
