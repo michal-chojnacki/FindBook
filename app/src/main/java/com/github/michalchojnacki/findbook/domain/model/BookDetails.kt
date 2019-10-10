@@ -1,12 +1,14 @@
 package com.github.michalchojnacki.findbook.domain.model
 
-data class Book(
+data class BookDetails(
     val id: Long,
     val title: String,
-    val author: String,
+    val authors: List<String>,
     val imageUrl: String,
     val ratingsCount: Int,
     val textReviewsCount: Int,
     val originalPublicationYear: Int?,
-    val averageRating: Double
+    val averageRating: Double,
+    val description: String,
+    val reviewsWidget : String
 )

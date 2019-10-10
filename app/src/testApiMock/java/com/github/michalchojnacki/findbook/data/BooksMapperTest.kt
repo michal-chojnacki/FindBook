@@ -1,6 +1,8 @@
 package com.github.michalchojnacki.findbook.data
 
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
+import com.github.michalchojnacki.findbook.data.model.BooksSearchRawModel
+import com.github.michalchojnacki.findbook.data.model.mapper.BooksMapper
 import org.junit.Assert
 import org.junit.Test
 
@@ -10,7 +12,7 @@ class BooksMapperTest {
 
     @Test
     fun `test mapping with happy scenario`() {
-        val booksSearchRawModel = fakeSearchForBooksService.successfulResponseBody
+        val booksSearchRawModel = fakeSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody
 
         val books = booksMapper.map(booksSearchRawModel)
 
@@ -28,7 +30,7 @@ class BooksMapperTest {
         val booksSearchRawModel = BooksSearchRawModel().apply {
             search = BooksSearchRawModel.Search().apply {
                 results =
-                    fakeSearchForBooksService.successfulResponseBody.search!!.results!!.toMutableList()
+                    fakeSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody.search!!.results!!.toMutableList()
                         .apply { add(BooksSearchRawModel.Work()) }
             }
         }

@@ -1,4 +1,4 @@
-package com.github.michalchojnacki.findbook.data
+package com.github.michalchojnacki.findbook.data.model
 
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
@@ -6,14 +6,14 @@ import org.simpleframework.xml.Root
 
 @Root(name = "GoodreadsResponse", strict = false)
 class BooksSearchRawModel {
-    @set:Element
-    @get:Element
+    @set:Element(name = "search")
+    @get:Element(name = "search")
     var search: Search? = null
 
     @Root(strict = false)
     class Search {
-        @set:ElementList
-        @get:ElementList
+        @set:ElementList(name = "results")
+        @get:ElementList(name = "results")
         var results: List<Work>? = null
     }
 

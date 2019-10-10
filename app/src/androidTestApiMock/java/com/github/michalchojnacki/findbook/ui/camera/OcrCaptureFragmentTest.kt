@@ -42,7 +42,7 @@ class OcrCaptureFragmentTest {
     fun testScanning_WhenTextHasBooks() {
         val fakeText = "fakeText1"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeText) }.returns(
-            Response.success(mockSearchForBooksService.successfulResponseBody)
+            Response.success(mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody)
         )
 
         launchFragmentInContainer<OcrCaptureFragment>(
@@ -70,7 +70,7 @@ class OcrCaptureFragmentTest {
     fun testScanning_WhenTextDoesNotHaveBooks() {
         val fakeText = "fakeText2"
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(fakeText) }.returns(
-            Response.success(mockSearchForBooksService.emptyResponseBody)
+            Response.success(mockSearchForBooksService.searchForBooksWithQueryEmptyResponseBody)
         )
 
         launchFragmentInContainer<OcrCaptureFragment>(

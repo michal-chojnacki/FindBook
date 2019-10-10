@@ -1,6 +1,7 @@
 package com.github.michalchojnacki.findbook.data
 
 import com.github.michalchojnacki.findbook.data.di.MockSearchForBooksService
+import com.github.michalchojnacki.findbook.data.model.mapper.BooksMapper
 import com.github.michalchojnacki.findbook.di.DaggerTestAppComponent
 import com.github.michalchojnacki.findbook.domain.model.Result
 import io.mockk.coEvery
@@ -30,7 +31,7 @@ class SearchForBooksRemoteDataSourceTest {
 
     @Test
     fun `test successful scenario`() = runBlocking {
-        val fakeBooksSearchRawModel = mockSearchForBooksService.successfulResponseBody
+        val fakeBooksSearchRawModel = mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
             .returns(Response.success(fakeBooksSearchRawModel))
 
@@ -54,7 +55,7 @@ class SearchForBooksRemoteDataSourceTest {
     @Test
     fun `test retry`() = runBlocking {
         var isFirstAttempt = true
-        val fakeBooksSearchRawModel = mockSearchForBooksService.successfulResponseBody
+        val fakeBooksSearchRawModel = mockSearchForBooksService.searchForBooksWithQuerySuccessfulResponseBody
         coEvery { mockSearchForBooksService.searchForBooksWithQuery(FAKE_QUERY) }
             .answers {
                 if (isFirstAttempt) {

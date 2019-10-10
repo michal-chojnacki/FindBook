@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.github.michalchojnacki.findbook.data.SearchForBooksService
 import com.github.michalchojnacki.findbook.data.di.RepositoryModule
+import com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsViewModel
 import com.github.michalchojnacki.findbook.ui.booklist.BookListViewModel
 import com.github.michalchojnacki.findbook.ui.camera.OcrCaptureViewModel
 import com.github.michalchojnacki.findbook.ui.navigation.MainNavigationViewModel
@@ -30,6 +31,8 @@ interface ApplicationComponent {
     val typingSearchViewModel: TypingSearchViewModel
 
     val ocrCaptureViewModel: OcrCaptureViewModel
+
+    val bookDetailsViewModelFactory: BookDetailsViewModel.Factory
 
     @VisibleForTesting
     val searchForBooksService: SearchForBooksService

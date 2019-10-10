@@ -5,6 +5,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.github.michalchojnacki.findbook.R
+import com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsFragment
+import com.github.michalchojnacki.findbook.ui.bookdetails.BookDetailsReviewsFragment
 import com.github.michalchojnacki.findbook.ui.booklist.BookListFragment
 import com.github.michalchojnacki.findbook.ui.camera.OcrCaptureFragment
 import com.github.michalchojnacki.findbook.ui.common.EventObserver
@@ -36,6 +38,18 @@ class MainNavigationActivity : AppCompatActivity() {
                 is MainNavigationViewModel.UiResult.ShowTypingSearch -> {
                     supportFragmentManager.commit {
                         replace(R.id.container, TypingSearchFragment.newInstance())
+                    }
+                }
+                is MainNavigationViewModel.UiResult.ShowBookDetails -> {
+                    supportFragmentManager.commit {
+                        addToBackStack(null)
+                        replace(R.id.container, BookDetailsFragment.newInstance(it.book.id, it.book.title))
+                    }
+                }
+                is MainNavigationViewModel.UiResult.ShowReviews -> {
+                    supportFragmentManager.commit {
+                        addToBackStack(null)
+                        replace(R.id.container, BookDetailsReviewsFragment.newInstance(it.bookDetails.reviewsWidget, it.bookDetails.title))
                     }
                 }
             }.exhaustive

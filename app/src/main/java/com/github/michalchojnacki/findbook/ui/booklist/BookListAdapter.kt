@@ -9,7 +9,9 @@ import com.github.michalchojnacki.findbook.R
 import com.github.michalchojnacki.findbook.databinding.BookListItemBinding
 import com.github.michalchojnacki.findbook.domain.model.Book
 
-class BookListAdapter(private val requestManager: RequestManager, private val books: List<Book>) :
+class BookListAdapter(private val requestManager: RequestManager,
+                      private val books: List<Book>,
+                      private val onBookSelectedListener: OnBookSelectedListener?) :
     RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
     class ViewHolder(val binding: BookListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -19,13 +21,15 @@ class BookListAdapter(private val requestManager: RequestManager, private val bo
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.viewModel = BookListItemViewModel(requestManager, books[position])
+        holder.binding.viewModel = BookListItemViewModel(requestManager, books[position], onItemClicked = {
+            onBookSelectedListener?.onBookSelected(books[position])
+        })
     }
 
     override fun getItemCount() = books.size
 }
 
-@BindingAdapter("requestManager", "bookListAdapter", requireAll = true)
-fun RecyclerView.bindBookListAdapter(requestManager: RequestManager, books: List<Book>) {
-    adapter = BookListAdapter(requestManager, books)
+@BindingAdapter("requestManager", "bookListAdapter", "onBookSelectedListener", requireAll = true)
+fun RecyclerView.bindBookListAdapter(requestManager: RequestManager, books: List<Book>, onBookSelectedListener: OnBookSelectedListener?) {
+    adapter = BookListAdapter(requestManager, books, onBookSelectedListener)
 }
