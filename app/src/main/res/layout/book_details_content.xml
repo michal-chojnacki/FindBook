@@ -109,7 +109,7 @@
                     android:layout_marginTop="@dimen/margin_sm"
                     android:contentDescription="@string/book_list_item_rating_icon_description"
                     android:src="@drawable/ic_star"
-                    android:tint="@color/book_list_item_rating_icon"
+                    app:tint="@color/book_list_item_rating_icon"
                     app:layout_constraintEnd_toStartOf="@+id/bookDetailsRatingBarrier"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@+id/bookDetailsRating"

@@ -106,7 +106,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bookListItemTitle"
                 android:src="@drawable/ic_star"
-                android:tint="@color/book_list_item_rating_icon"/>
+                app:tint="@color/book_list_item_rating_icon"/>
 
         <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/bookListItemRatingBarrier"
